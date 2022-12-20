@@ -1,4 +1,5 @@
 import Page404 from './_page404/page404';
+import Header from './header/Header';
 
 class App {
   private _componentElement = document.body;
@@ -9,7 +10,7 @@ class App {
   }
 
   init(): void {
-    const header = document.createElement('header');
+    const header = new Header().createComponent();
     this._componentElement.prepend(header);
     this.renderContent();
   }
@@ -20,8 +21,10 @@ class App {
     switch (location) {
       case '':
         this.contentToLoad = document.createElement('div');
+        document.title = 'Магазин навесного оборудования для вашей спецтехники.'
         break;
       default:
+        document.title = 'ой! 404'
         this.contentToLoad = new Page404().createComponent();
         break;
     }

@@ -21,10 +21,10 @@ class App {
     switch (location) {
       case '':
         this.contentToLoad = document.createElement('div');
-        document.title = 'Магазин навесного оборудования для вашей спецтехники.'
+        document.title = 'Магазин навесного оборудования для вашей спецтехники.';
         break;
       default:
-        document.title = 'ой! 404'
+        document.title = 'ой! 404';
         this.contentToLoad = new Page404().createComponent();
         break;
     }

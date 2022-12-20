@@ -31,7 +31,9 @@ class Header {
     cartDiv.className = 'cart';
 
     const logoDiv = document.createElement('div');
+
     logoDiv.dataset.cartCount = '5';
+
     logoDiv.className = 'cart__logo';
 
     const cartAmount = document.createElement('p');

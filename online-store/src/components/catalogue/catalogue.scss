@@ -1,6 +1,37 @@
 .main {
-  width: 90%;
+  max-width: 1440px;
   height: 50vh;
   margin: 1rem auto;
-  background-color: tomato;
+}
+
+.products-with-filters {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.topbar-switch-view__icon {
+  max-width: 1rem;
+}
+
+.topbar-switch-input {
+  // appearance: none;
+}
+
+.products-with-topbar {
+  // display: block;
+  width: 100%;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }

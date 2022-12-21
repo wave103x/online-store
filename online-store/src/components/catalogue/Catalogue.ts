@@ -1,4 +1,8 @@
+import Filters from '../filters/Filters';
 import './catalogue.scss';
+import testProducts from '../../data/products.json';
+import type ProductData from '../types/ProductData';
+import ProductItem from '../product-item/ProductItem';
 
 class Catalogue {
   private readonly TAG_MAIN = 'main';
@@ -7,20 +11,112 @@ class Catalogue {
   private readonly LINK_TEXT = 'to product';
   private readonly LINK_HREF = '#product';
   private _componentElement: HTMLElement;
+  private testProducts: ProductData[];
 
   constructor() {
     this._componentElement = document.createElement(this.TAG_MAIN);
+    this.testProducts = testProducts;
   }
 
   createComponent(): HTMLElement {
     const link = document.createElement(this.TAG_A);
     link.textContent = this.LINK_TEXT;
     link.href = this.LINK_HREF;
-    this._componentElement.append(link);
+    const productsWithTopBar = document.createElement('div');
+    productsWithTopBar.className = 'products-with-topbar';
+    productsWithTopBar.append(this.createTopBar(), this.createProducts())
+    const productsWithFilters = document.createElement('div');
+    productsWithFilters.className = 'products-with-filters';
+    productsWithFilters.append(new Filters().createComponent(), productsWithTopBar);
+
+    this._componentElement.append(
+      link,
+      this.createHeading('Навесное оборудование'),
+      this.createSearch(),
+      productsWithFilters
+    );
 
     this._componentElement.className = this.CLASS_MAIN;
 
     return this._componentElement;
+  }
+
+  private createHeading(headingText: string): HTMLElement {
+    const heading = document.createElement('h1');
+    heading.className = 'h1';
+    heading.textContent = headingText;
+    return heading;
+  }
+
+  private createSearch(): HTMLElement {
+    const searchForm = document.createElement('form');
+    const searchInput = document.createElement('input');
+    const searchBtn = document.createElement('button');
+
+    searchForm.setAttribute('method', 'get');
+    searchForm.setAttribute('action', '');
+    searchForm.setAttribute('onsubmit', 'return false');
+    searchForm.className = 'search';
+
+    searchInput.setAttribute('type', 'text');
+    searchInput.setAttribute('name', 'search-text');
+    searchInput.setAttribute('placeholder', 'Поиск по каталогу');
+    searchInput.className = 'search__input';
+
+    searchBtn.className = 'search__btn';
+    searchBtn.textContent = 'Найти';
+
+    searchForm.append(searchInput, searchBtn);
+    return searchForm;
+  }
+
+  private createTopBar(): HTMLElement {
+    const topBar = document.createElement('section');
+    topBar.className = 'top-bar';
+
+    const sortBtn = document.createElement('button');
+    const itemsOnPage = document.createElement('p');
+    const productsViewSwitch = document.createElement('div');
+
+    sortBtn.textContent = 'Сортировать';
+    sortBtn.className = 'topbar__sort-btn';
+
+    itemsOnPage.textContent = 'Товаров найдено:';
+    itemsOnPage.className = 'topbar__items-on-page';
+
+    const viewWideLabel = document.createElement('label');
+    const viewWideRadio = document.createElement('input');
+    const viewGridLabel = document.createElement('label');
+    const viewGridRadio = document.createElement('input');
+    viewWideRadio.setAttribute('name', 'view-switch');
+    viewWideRadio.setAttribute('type', 'radio');
+    viewWideRadio.className = 'topbar-switch-input';
+    viewGridRadio.setAttribute('name', 'view-switch');
+    viewGridRadio.setAttribute('type', 'radio');
+    viewGridRadio.setAttribute('checked', 'true');
+    viewGridRadio.className = 'topbar-switch-input';
+    const svgWide = new Image();
+    svgWide.className = 'topbar-switch-view__icon';
+    svgWide.src = require('../../assets/icons/view_wide.svg') as string;
+    const svgGrid = new Image();
+    svgGrid.className = 'topbar-switch-view__icon';
+    svgGrid.src = require('../../assets/icons/view_grid.svg') as string;
+    viewWideLabel.append(viewWideRadio, svgWide);
+    viewGridLabel.append(viewGridRadio, svgGrid);
+    productsViewSwitch.append(viewGridLabel, viewWideLabel);
+
+    topBar.append(sortBtn, itemsOnPage, productsViewSwitch);
+    return topBar;
+  }
+
+  private createProducts(): HTMLElement {
+    const products = document.createElement('div');
+    products.className = 'products';
+    for (let i = 0; i < this.testProducts.length; i++) {
+      const item = new ProductItem().createElement();
+      if (item) products.append(item);
+    }
+    return products;
   }
 }
 

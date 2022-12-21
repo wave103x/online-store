@@ -13,6 +13,8 @@ class App {
   }
 
   private renderPage(): void {
+    console.log('render');
+    console.log(window.location.hash);
     const location = window.location.hash.slice(1);
     this._componentElement.innerHTML = '';
     switch (location) {

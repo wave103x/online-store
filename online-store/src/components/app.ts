@@ -1,7 +1,7 @@
 import Page404 from './_page404/page404';
 
 class App {
-  private _componentElement = document.querySelector('main') as HTMLElement;
+  private _componentElement = document.querySelector('.app') as HTMLElement;
   private pageToLoad!: HTMLElement;
 
   constructor() {

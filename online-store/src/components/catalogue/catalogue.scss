@@ -1,6 +1,5 @@
 .main {
   max-width: 1440px;
-  height: 50vh;
   margin: 1rem auto;
 }
 
@@ -15,6 +14,15 @@
   justify-content: space-between;
   flex-grow: 1;
   margin-bottom: 1rem;
+}
+
+.heading-search {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  margin-left: auto;
 }
 
 .topbar-switch-view__icon {

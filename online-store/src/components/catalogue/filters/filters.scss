@@ -1,0 +1,18 @@
+.filters {
+  width: 256px;
+  height: 1000px;
+  background-color: aquamarine;
+  flex-shrink: 0;
+  padding: 1rem;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter__title {
+  font-weight: bold;
+  margin: 0;
+}

@@ -1,40 +1,36 @@
-import Filters from '../filters/Filters';
+import Filters from './filters/Filters';
 import './catalogue.scss';
-import testProducts from '../../data/products.json';
+import initialProducts from '../../data/products.json';
 import type ProductData from '../types/ProductData';
-import ProductItem from '../product-item/ProductItem';
+import ProductItem from './product-item/ProductItem';
 
 class Catalogue {
   private readonly TAG_MAIN = 'main';
-  private readonly TAG_A = 'a';
   private readonly CLASS_MAIN = 'main';
-  private readonly LINK_TEXT = 'to product';
-  private readonly LINK_HREF = '#product';
   private _componentElement: HTMLElement;
-  private testProducts: ProductData[];
+  private initialProducts: ProductData[];
+  private currentProducts!: ProductData[];
 
   constructor() {
     this._componentElement = document.createElement(this.TAG_MAIN);
-    this.testProducts = testProducts;
+    this.initialProducts = initialProducts;
+    this.currentProducts = [...this.initialProducts];
   }
 
   createComponent(): HTMLElement {
-    const link = document.createElement(this.TAG_A);
-    link.textContent = this.LINK_TEXT;
-    link.href = this.LINK_HREF;
     const productsWithTopBar = document.createElement('div');
     productsWithTopBar.className = 'products-with-topbar';
-    productsWithTopBar.append(this.createTopBar(), this.createProducts())
+    productsWithTopBar.append(this.createTopBar(), this.createProducts(this.initialProducts));
+    
     const productsWithFilters = document.createElement('div');
     productsWithFilters.className = 'products-with-filters';
-    productsWithFilters.append(new Filters().createComponent(), productsWithTopBar);
+    productsWithFilters.append(this.createFilters(), productsWithTopBar);
 
-    this._componentElement.append(
-      link,
-      this.createHeading('Навесное оборудование'),
-      this.createSearch(),
-      productsWithFilters
-    );
+    const headingWithSearch = document.createElement('div');
+    headingWithSearch.className = 'heading-search';
+    headingWithSearch.append(this.createHeading('Навесное оборудование'), this.createSearch());
+
+    this._componentElement.append(headingWithSearch, productsWithFilters);
 
     this._componentElement.className = this.CLASS_MAIN;
 
@@ -43,7 +39,7 @@ class Catalogue {
 
   private createHeading(headingText: string): HTMLElement {
     const heading = document.createElement('h1');
-    heading.className = 'h1';
+    heading.className = 'catalogue__h1';
     heading.textContent = headingText;
     return heading;
   }
@@ -109,14 +105,19 @@ class Catalogue {
     return topBar;
   }
 
-  private createProducts(): HTMLElement {
+  private createProducts(productsData: ProductData[]): HTMLElement {
     const products = document.createElement('div');
     products.className = 'products';
-    for (let i = 0; i < this.testProducts.length; i++) {
-      const item = new ProductItem().createElement();
+    for (let i = 0; i < productsData.length; i++) {
+      const item = new ProductItem().createElement(productsData[i]);
       if (item) products.append(item);
     }
     return products;
+  }
+
+  private createFilters() {
+    const filters = new Filters(this.currentProducts).createComponent();
+    return filters;
   }
 }
 

@@ -1,0 +1,14 @@
+.product {
+  flex-basis: 256px;
+  flex-grow: 1;
+  height: 400px;
+}
+
+.stub {
+  width: 100%;
+  height: 100%;
+  background-color: cadetblue;
+  &:hover {
+    background-color: darken($color: cadetblue, $amount: 10);
+  }
+}

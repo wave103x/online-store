@@ -1,0 +1,506 @@
+[
+  {
+    "id": 1,
+    "title": "Бетонолом VM JCB",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 60000,
+    "stock": 3,
+    "baseVehicle": ["JCB", "Doosan", "Кранэкс", "Hitachi"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Система зубьев VM Case",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 9500,
+    "stock": 1,
+    "baseVehicle": ["Case", "Кранэкс"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 3,
+    "title": "Отвал VM Case",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 750000,
+    "stock": 6,
+    "baseVehicle": ["Case", "JCB", "Caterpillar", "Komatsu"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 4,
+    "title": "Оси, пальцы втулки VM John Deere",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 8300,
+    "stock": 11,
+    "baseVehicle": ["John Deere", "Doosan", "Case", "JCB"],
+    "category": "Оси, втулки",
+    "thumbnail": "../assets/images/productsosi-th.jpg",
+    "images": ["../assets/images/productsosi1.jpg", "../assets/images/productsosi2.jpg"]
+  },
+  {
+    "id": 5,
+    "title": "Бетонолом VM Case",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 640000,
+    "stock": 10,
+    "baseVehicle": ["Case", "Liebherr", "Caterpillar", "Кранэкс"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Оси, пальцы втулки VM Кранэкс",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 2800,
+    "stock": 11,
+    "baseVehicle": ["Кранэкс", "Liebherr", "John Deere"],
+    "category": "Оси, втулки",
+    "thumbnail": "../assets/images/productsosi-th.jpg",
+    "images": ["../assets/images/productsosi1.jpg", "../assets/images/productsosi2.jpg"]
+  },
+  {
+    "id": 7,
+    "title": "Отвал VM Case",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 940000,
+    "stock": 3,
+    "baseVehicle": ["Case", "Volvo", "Hitachi"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 8,
+    "title": "Рабочее оборудование VM Кранэкс",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 4100000,
+    "stock": 1,
+    "baseVehicle": ["Кранэкс", "Caterpillar"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Рабочее оборудование VM Doosan",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 400000,
+    "stock": 10,
+    "baseVehicle": ["Doosan", "Volvo", "Hitachi"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Бетонолом VM Кранэкс",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 460000,
+    "stock": 12,
+    "baseVehicle": ["Кранэкс", "JCB"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Рабочее оборудование VM Doosan",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 6000000,
+    "stock": 2,
+    "baseVehicle": ["Doosan", "Hitachi", "Hyundai"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Система зубьев VM JCB",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 900,
+    "stock": 0,
+    "baseVehicle": ["JCB", "Hyundai", "Hitachi", "Komatsu"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 13,
+    "title": "Система зубьев VM Hitachi",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 1300,
+    "stock": 5,
+    "baseVehicle": ["Hitachi", "JCB", "Liebherr", "Doosan"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 14,
+    "title": "Отвал VM Volvo",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 850000,
+    "stock": 10,
+    "baseVehicle": ["Volvo", "Case", "Doosan"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 15,
+    "title": "Рабочее оборудование VM Doosan",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 3000000,
+    "stock": 10,
+    "baseVehicle": ["Doosan", "Liebherr", "Hitachi"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Система зубьев VM Case",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 2000,
+    "stock": 6,
+    "baseVehicle": ["Case", "Doosan"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 17,
+    "title": "Бетонолом VM Hyundai",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 690000,
+    "stock": 10,
+    "baseVehicle": ["Hyundai", "Doosan"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Отвал VM Hitachi",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 910000,
+    "stock": 11,
+    "baseVehicle": ["Hitachi", "JCB", "Doosan", "Hyundai"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 19,
+    "title": "Рабочее оборудование VM Doosan",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 6500000,
+    "stock": 11,
+    "baseVehicle": ["Doosan", "John Deere", "Komatsu"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Гусеничная цепь VM JCB",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 9300000,
+    "stock": 0,
+    "baseVehicle": ["JCB", "Komatsu", "Hitachi", "Liebherr"],
+    "category": "Ходовая часть",
+    "thumbnail": "../assets/images/productshod-th.jpg",
+    "images": ["../assets/images/productshod1.jpg", "../assets/images/productshod2.jpg"]
+  },
+  {
+    "id": 21,
+    "title": "Система зубьев VM Hyundai",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 9200,
+    "stock": 2,
+    "baseVehicle": ["Hyundai", "Hitachi", "Komatsu"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 22,
+    "title": "Рабочее оборудование VM Case",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 4800000,
+    "stock": 9,
+    "baseVehicle": ["Case", "Doosan", "Liebherr", "Caterpillar", "Кранэкс"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Оси, пальцы втулки VM Hitachi",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 5700,
+    "stock": 12,
+    "baseVehicle": ["Hitachi", "Volvo", "John Deere"],
+    "category": "Оси, втулки",
+    "thumbnail": "../assets/images/productsosi-th.jpg",
+    "images": ["../assets/images/productsosi1.jpg", "../assets/images/productsosi2.jpg"]
+  },
+  {
+    "id": 24,
+    "title": "Система зубьев VM Hitachi",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 100,
+    "stock": 10,
+    "baseVehicle": ["Hitachi", "Liebherr", "Hyundai"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 25,
+    "title": "Отвал VM JCB",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 60000,
+    "stock": 6,
+    "baseVehicle": ["JCB", "Liebherr", "Hyundai"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 26,
+    "title": "Бетонолом VM John Deere",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 930000,
+    "stock": 4,
+    "baseVehicle": ["John Deere", "Hitachi", "Caterpillar"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Гусеничная цепь VM Liebherr",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 7500000,
+    "stock": 10,
+    "baseVehicle": ["Liebherr", "Volvo", "Hitachi", "Кранэкс", "Hyundai"],
+    "category": "Ходовая часть",
+    "thumbnail": "../assets/images/productshod-th.jpg",
+    "images": ["../assets/images/productshod1.jpg", "../assets/images/productshod2.jpg"]
+  },
+  {
+    "id": 28,
+    "title": "Ковш VM Hyundai",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 10000,
+    "stock": 11,
+    "baseVehicle": ["Hyundai", "Case", "John Deere", "Komatsu"],
+    "category": "Ковши экскаваторные",
+    "thumbnail": "../assets/images/productskovsh-th.jpg",
+    "images": [
+      "../assets/images/productskovsh1.jpg",
+      "../assets/images/productskovsh2.jpg",
+      "../assets/images/productskovsh3.jpg",
+      "../assets/images/productskovsh4.jpg",
+      "../assets/images/productskovsh5.jpg"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Бетонолом VM Caterpillar",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 180000,
+    "stock": 0,
+    "baseVehicle": ["Caterpillar", "John Deere", "Case", "Кранэкс", "Hitachi"],
+    "category": "Бетоноломы",
+    "thumbnail": "../assets/images/productsbetonolom-th.jpg",
+    "images": [
+      "../assets/images/productsbetonolom1.jpg",
+      "../assets/images/productsbetonolom2.jpg",
+      "../assets/images/productsbetonolom3.jpg"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Оси, пальцы втулки VM Volvo",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 5300,
+    "stock": 2,
+    "baseVehicle": ["Volvo", "Doosan", "Liebherr"],
+    "category": "Оси, втулки",
+    "thumbnail": "../assets/images/productsosi-th.jpg",
+    "images": ["../assets/images/productsosi1.jpg", "../assets/images/productsosi2.jpg"]
+  },
+  {
+    "id": 31,
+    "title": "Система зубьев VM Komatsu",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 5500,
+    "stock": 10,
+    "baseVehicle": ["Komatsu", "John Deere", "Doosan", "Hitachi", "Liebherr"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 32,
+    "title": "Система зубьев VM Hitachi",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 9700,
+    "stock": 12,
+    "baseVehicle": ["Hitachi", "Doosan", "Кранэкс"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 33,
+    "title": "Ковш VM John Deere",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 890000,
+    "stock": 6,
+    "baseVehicle": ["John Deere", "Komatsu", "Volvo"],
+    "category": "Ковши экскаваторные",
+    "thumbnail": "../assets/images/productskovsh-th.jpg",
+    "images": [
+      "../assets/images/productskovsh1.jpg",
+      "../assets/images/productskovsh2.jpg",
+      "../assets/images/productskovsh3.jpg",
+      "../assets/images/productskovsh4.jpg",
+      "../assets/images/productskovsh5.jpg"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Гусеничная цепь VM Case",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 2900000,
+    "stock": 3,
+    "baseVehicle": ["Case", "Komatsu", "Volvo", "Doosan"],
+    "category": "Ходовая часть",
+    "thumbnail": "../assets/images/productshod-th.jpg",
+    "images": ["../assets/images/productshod1.jpg", "../assets/images/productshod2.jpg"]
+  },
+  {
+    "id": 35,
+    "title": "Гусеничная цепь VM John Deere",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 4800000,
+    "stock": 12,
+    "baseVehicle": ["John Deere", "Hitachi", "Doosan"],
+    "category": "Ходовая часть",
+    "thumbnail": "../assets/images/productshod-th.jpg",
+    "images": ["../assets/images/productshod1.jpg", "../assets/images/productshod2.jpg"]
+  },
+  {
+    "id": 36,
+    "title": "Отвал VM Doosan",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 860000,
+    "stock": 8,
+    "baseVehicle": ["Doosan", "Volvo", "Hyundai"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 37,
+    "title": "Отвал VM John Deere",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 950000,
+    "stock": 12,
+    "baseVehicle": ["John Deere", "Komatsu", "Liebherr", "Doosan", "Кранэкс"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  },
+  {
+    "id": 38,
+    "title": "Система зубьев VM Volvo",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 7200,
+    "stock": 8,
+    "baseVehicle": ["Volvo", "John Deere", "Liebherr"],
+    "category": "Коронки, адаптеры",
+    "thumbnail": "../assets/images/productskoron-th.jpg",
+    "images": ["../assets/images/productskoron1.jpg", "../assets/images/productskoron2.jpg"]
+  },
+  {
+    "id": 39,
+    "title": "Рабочее оборудование VM Volvo",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 800000,
+    "stock": 8,
+    "baseVehicle": ["Volvo", "Caterpillar", "Komatsu"],
+    "category": "Стрелы, рукояти",
+    "thumbnail": "../assets/images/productsarm-th.jpg",
+    "images": [
+      "../assets/images/productsarm1.jpg",
+      "../assets/images/productsarm2.jpg",
+      "../assets/images/productsarm3.jpg"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Отвал VM Hyundai",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 380000,
+    "stock": 0,
+    "baseVehicle": ["Hyundai", "John Deere", "Doosan", "JCB"],
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "../assets/images/productsotval-th.jpg",
+    "images": ["../assets/images/productsotval1.jpg", "../assets/images/productsotval2.jpg"]
+  }
+]

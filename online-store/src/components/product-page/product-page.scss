@@ -1,6 +1,19 @@
-.product {
-  width: 90%;
-  height: 50vh;
-  margin: 1rem auto;
-  background-color: darkcyan;
+.photo-desc {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  column-gap: 2rem;
+}
+
+.description {
+  background-color: antiquewhite;
+  height: 600px;
+}
+
+.product__h1 {
+  font-size: 1.5rem;
+}
+
+.slider {
+  background-color: aqua;
+  height: 500px;
 }

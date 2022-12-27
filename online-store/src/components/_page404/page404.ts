@@ -39,7 +39,7 @@ class Page404 {
     button.classList.add('button');
     button.classList.add('not-found_button');
     button.innerText = 'Перейти на главную';
-    button.setAttribute('href', 'index.html');
+    button.setAttribute('href', '#');
     return button;
   }
 

@@ -1,5 +1,7 @@
 import Page404 from './_page404/page404';
 import Header from './header/Header';
+import Catalogue from './catalogue/Catalogue';
+import ProductPage from './product-page/ProductPage';
 
 class App {
   private _componentElement = document.body;
@@ -17,10 +19,15 @@ class App {
 
   private renderContent(): void {
     const location = window.location.hash.slice(1);
+    if (this.contentToLoad && location.includes('?')) return;
     if (this.contentToLoad) this.contentToLoad.remove();
-    switch (location) {
+    const path = location.includes('?') ? location.slice(0, location.indexOf('?')) : location;
+    switch (path) {
+      case location.match(/products\/\d+/gi)?.at(0):
+        this.contentToLoad = new ProductPage().getComponent();
+        break;
       case '':
-        this.contentToLoad = document.createElement('div');
+        this.contentToLoad = new Catalogue().createComponent();
         document.title = 'Магазин навесного оборудования для вашей спецтехники.';
         break;
       default:

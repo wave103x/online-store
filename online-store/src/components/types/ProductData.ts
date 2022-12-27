@@ -4,10 +4,10 @@ type ProductData = {
   description: string;
   price: number;
   stock: number;
-  baseVehicle: string[];
+  baseVehicle: string;
   category: string;
-  thumbnail: string;
-  images: string[];
+  thumbnail?: string;
+  images?: string[];
 }
 
 export default ProductData;

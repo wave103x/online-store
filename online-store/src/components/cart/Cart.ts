@@ -1,4 +1,5 @@
 import './cart.scss';
+import Form from './form/form';
 import ProductData from '../types/ProductData';
 import ProductInCart from '../types/ProductInCart';
 
@@ -88,6 +89,11 @@ class Cart {
         document.body.querySelector('.main')?.remove();
         document.body.append(cart.createComponent());
       }
+    });
+
+    const button = this._componentElement.querySelector('.summary__button') as HTMLElement;
+    button.addEventListener('click', function () {
+      document.querySelector('.main')?.append(new Form().createComponent());
     });
   }
 

@@ -6,19 +6,10 @@ class ProductItem {
   private _productData: ProductData;
   private _isHidden = false;
 
-  constructor(productData: ProductData) {
+  constructor(productData: ProductData, searchParams: URLSearchParams) {
     this._productData = productData;
-    this.createElement(this._productData);
+    this.createElement(this._productData, searchParams);
     document.addEventListener('eventGeneral', (event) => this.updateState(<CustomEvent>event));
-  }
-
-  makeWide(data: Element): void {
-    data.classList.remove('product_grid');
-    data.classList.add('product_wide');
-  }
-  makeGrid(data: Element): void {
-    data.classList.add('product_grid');
-    data.classList.remove('product_wide');
   }
 
   private updateState(event: CustomEvent) {
@@ -41,24 +32,17 @@ class ProductItem {
     return this._componentElement;
   }
 
-  private createElement(data: ProductData) {
+  private createElement(data: ProductData, searchParams: URLSearchParams) {
     this._productData = data;
     this._componentElement.className = 'product';
 
-    this._componentElement.classList.add('product_grid');
-
-    // if (gridView) {
-    //   this._componentElement.classList.remove('product_wide');
-    //   this._componentElement.classList.add('product_grid');
-    // } else {
-    //   this._componentElement.classList.remove('product_grid');
-    //   this._componentElement.classList.add('product_wide');
-    // }
-
-    // this._componentElement.addEventListener('viewChange', function () {
-    //   this._componentElement.classList.toggle('product_wide');
-    //   this._componentElement.classList.toggle('product_grid');
-    // });
+    if (searchParams.get('viewGrid') === 'false') {
+      this._componentElement.classList.add('product_wide');
+      this._componentElement.classList.remove('product_grid');
+    } else {
+      this._componentElement.classList.remove('product_wide');
+      this._componentElement.classList.add('product_grid');
+    }
 
     const imgWrapper = document.createElement('div');
     imgWrapper.className = 'product__img-wrapper';

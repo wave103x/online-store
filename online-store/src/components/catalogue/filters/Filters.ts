@@ -1,35 +1,43 @@
 import type ProductData from '../../types/ProductData';
 import ParamsToFilter from '../../types/ParamsToFilter';
 import baseVehicles from './bases.json';
+import FilterNames from '../../types/FilterNames';
 import './filters.scss';
 
 class Filters {
   private products: ProductData[];
-  private _category: Array<string> = [];
+  private _productsCount: number;
 
   constructor(products: ProductData[]) {
     this.products = products;
+    this._productsCount = products.length;
   }
 
-  createComponent(): HTMLElement {
+  createComponent(searchParams: URLSearchParams): HTMLElement {
     const filters = document.createElement('sidebar');
     filters.className = 'filters';
 
-    const categoryFilter = this.createFilter('radio', ParamsToFilter.Category, this.products);
-    const baseVehicleFilter = this.createFilter('checkbox', ParamsToFilter.BaseVehicle, this.products);
+    const categoryFilter = this.createFilter('radio', ParamsToFilter.Category, this.products, searchParams);
+    const baseVehicleFilter = this.createFilter('checkbox', ParamsToFilter.BaseVehicle, this.products, searchParams);
     const resetBtn = this.createButtons('reset');
     const copyBtn = this.createButtons('copy');
 
-    filters.append(resetBtn, copyBtn, categoryFilter, baseVehicleFilter);
+    filters.append(copyBtn, resetBtn, categoryFilter, baseVehicleFilter);
     return filters;
   }
 
-  private createFilter(type: 'checkbox' | 'radio' | 'slide', key: keyof ProductData, data: ProductData[]) {
+  private createFilter(
+    type: 'checkbox' | 'radio' | 'slide',
+    key: keyof ProductData,
+    data: ProductData[],
+    searchParams: URLSearchParams
+  ) {
+    const filterName = key === 'category' ? 'Категория' : key === 'baseVehicle' ? 'Базовая машина' : null;
     const filter = document.createElement('div');
     filter.className = 'filter';
 
     const filterTitle = document.createElement('p');
-    filterTitle.textContent = key;
+    filterTitle.textContent = filterName;
     filterTitle.className = 'filter__title';
 
     let items = [...new Set(data.map((e) => e[key] as string))];
@@ -42,10 +50,19 @@ class Filters {
       inputBox.setAttribute('type', type);
       inputBox.setAttribute('name', key);
       inputBox.setAttribute('value', items[i]);
+
+      const queryUrlValues = searchParams.getAll(key);
+      if (queryUrlValues.length) {
+        queryUrlValues.includes(inputBox.value) ? (inputBox.checked = true) : (inputBox.checked = false);
+      }
+
       filterItemLabel.prepend(inputBox);
 
       inputBox.addEventListener('change', (e) => this.filterHandler(e, key));
-      document.addEventListener('eventGeneral', (e) => this.filterConnect(<CustomEvent>e, key, inputBox, filterItemLabel));
+
+      document.addEventListener('eventGeneral', (e) =>
+        this.filterConnect(<CustomEvent>e, key, inputBox, filterItemLabel)
+      );
 
       filter.append(filterItemLabel);
     }
@@ -56,16 +73,37 @@ class Filters {
 
   private filterConnect(event: CustomEvent, key: keyof ProductData, input: HTMLElement, label: HTMLElement) {
     if (!(input instanceof HTMLInputElement)) return;
-    const resultBase = this.products.filter((e) => event.detail.baseVehicle.includes(e.baseVehicle));
-    const resultCategory = this.products.filter((e) => event.detail.category.includes(e.category));
+    let resultBase = this.products.filter((e) => event.detail.baseVehicle.includes(e.baseVehicle));
+    let resultCategory = this.products.filter((e) => event.detail.category.includes(e.category));
+    if (!resultBase.length) resultBase = [...this.products];
+    if (!resultCategory.length) resultCategory = [...this.products];
 
-    const visibleProducts = resultBase.filter(value => resultCategory.includes(value));
+    const productsOnPage = resultBase.filter((value) => resultCategory.includes(value));
 
-    // if (event.detail.baseVehicle.includes(visibleProducts.))
-    // if (visibleProducts.includes((e) => event.detail(e.baseVehicle)))
+    const categoriesOnPage = [...new Set(productsOnPage.map((e) => e.category))];
+    const basesOnPage = [...new Set(productsOnPage.map((e) => e.baseVehicle))];
 
-    // if (event.detail.baseVehicle.includes(input.value)) label.hidden = false;
-    // else label.hidden = true;
+    switch (input.name) {
+      case 'category':
+        if (categoriesOnPage.includes(input.value)) {
+          label.classList.remove('filter_stealth');
+        } else {
+          label.classList.add('filter_stealth');
+        }
+        break;
+      case 'baseVehicle':
+        if (basesOnPage.includes(input.value)) {
+          label.classList.remove('filter_stealth');
+        } else {
+          label.classList.add('filter_stealth');
+        }
+        break;
+    }
+
+    if (event.detail?.reset) input.checked = false;
+
+    const productsOnPageEvent = new CustomEvent('productsOnPage', { detail: productsOnPage.length });
+    document.dispatchEvent(productsOnPageEvent);
   }
 
   private filterHandler(event: Event, key: keyof ProductData) {
@@ -74,30 +112,28 @@ class Filters {
     const value = elem.value;
 
     const searchParams = new URLSearchParams(document.location.hash.slice(2));
-    const current = searchParams.getAll(key) || [];
-
+    const currentParams = searchParams.getAll(key) || [];
     switch (elem.type) {
       case 'radio':
-        current.length = 0;
-        current.push(value);
+        currentParams.length = 0;
+        currentParams.push(value);
         searchParams.set(key, value);
         break;
       case 'checkbox':
-        if (elem.checked) current.push(value);
-        else current.splice(current.indexOf(value), 1);
+        if (elem.checked) currentParams.push(value);
+        else currentParams.splice(currentParams.indexOf(value), 1);
         searchParams.delete(key);
-        current.forEach((e) => searchParams.append(key, e));
+        [...new Set(currentParams)].forEach((e) => searchParams.append(key, e));
         break;
       default:
         break;
     }
 
     window.location.hash = '?' + searchParams.toString();
-
     const newEvent = new CustomEvent(key, {
       bubbles: true,
       detail: {
-        [key]: current,
+        [key]: currentParams,
       },
     });
     elem.dispatchEvent(newEvent);
@@ -105,53 +141,37 @@ class Filters {
 
   private createButtons(type: 'reset' | 'copy'): HTMLElement {
     const button = document.createElement('button');
+    const icon = new Image();
     switch (type) {
       case 'reset':
         button.textContent = 'Сбросить фильтры';
-        button.className = 'filter_reset-btn';
+        button.className = 'filter__btn filter_reset-btn';
+        icon.src = require('../../../assets/icons/icon-refresh.svg') as string;
+        button.prepend(icon);
         button.addEventListener('click', () => {
-          window.location.hash = '?';
+          window.location.hash = '#?';
+          document.dispatchEvent(
+            new CustomEvent('eventGeneral', {
+              detail: {
+                category: [],
+                baseVehicle: [],
+                reset: true,
+              },
+            })
+          );
         });
         break;
       case 'copy':
         button.textContent = 'Копировать фильтрацию';
-        button.className = 'filter_copy-btn';
+        button.className = 'filter__btn filter_copy-btn';
+        icon.src = require('../../../assets/icons/icon-copy.svg') as string;
+        button.prepend(icon);
         button.addEventListener('click', () => {
           navigator.clipboard.writeText(window.location.href);
         });
         break;
     }
     return button;
-  }
-
-  private inputBoxHandler(event: Event, key: keyof ProductData) {
-    const elem = event.target;
-    if (!(elem instanceof HTMLInputElement)) return;
-    const value = elem.value;
-
-    const searchParams = new URLSearchParams(window.location.hash.slice(2));
-
-    if (elem.type === 'radio') searchParams.set(key, value);
-    else {
-      if (searchParams.has(key)) {
-        let curValues = Array.from(searchParams.getAll(key));
-        if (curValues.includes(value)) {
-          curValues = curValues.filter((e) => e !== value);
-        } else {
-          curValues = curValues.concat(value);
-        }
-        if (!curValues.length) searchParams.delete(key);
-        else {
-          searchParams.delete(key);
-          for (let value of curValues) {
-            searchParams.append(key, value);
-          }
-        }
-      } else searchParams.set(key, value);
-    }
-    window.location.hash = '#?' + searchParams.toString();
-    // history.pushState(null, '', newPath);
-    // window.location.assign(newPath)
   }
 }
 

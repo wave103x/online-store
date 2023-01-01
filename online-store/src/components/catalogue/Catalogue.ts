@@ -21,12 +21,9 @@ class Catalogue {
     this.initialProducts = initialProducts;
     this.productsGridView = true;
     this.searchParams = new URLSearchParams(window.location.hash.slice(2));
-    window.addEventListener(
-      'hashchange',
-      () => {
-        this.searchParams = new URLSearchParams(window.location.hash.slice(2))
-      }
-    );
+    window.addEventListener('hashchange', () => {
+      this.searchParams = new URLSearchParams(window.location.hash.slice(2));
+    });
   }
 
   createComponent(): HTMLElement {
@@ -41,11 +38,21 @@ class Catalogue {
 
     const headingWithSearch = document.createElement('div');
     headingWithSearch.className = 'heading-search';
-    headingWithSearch.append(this.createHeading('Навесное оборудование'), this.createSearch());
+    headingWithSearch.append(this.createHeading('Навесное оборудование для спецтехники'), this.createSearch());
 
     this._componentElement.append(headingWithSearch, productsWithFilters);
 
     this._componentElement.className = this.CLASS_MAIN;
+
+    this.searchParams.toString();
+    document.dispatchEvent(
+      new CustomEvent('eventGeneral', {
+        detail: {
+          category: this.searchParams.getAll('category') || [],
+          baseVehicle: this.searchParams.getAll('baseVehicle') || [],
+        },
+      })
+    );
 
     return this._componentElement;
   }
@@ -83,12 +90,14 @@ class Catalogue {
     const topBar = document.createElement('section');
     topBar.className = 'topbar';
 
-    const itemsOnPage = document.createElement('p');
+    const itemsOnPage = document.createElement('div');
 
     const sortSelect = this.createSelect(['Рекомендуем', 'Сначала дешевые', 'Сначала дорогие']);
 
-    itemsOnPage.textContent = 'Товаров найдено: ' + this.initialProducts.length;
     itemsOnPage.className = 'topbar__items-on-page';
+    document.addEventListener('productsOnPage', (e) => {
+      if (e instanceof CustomEvent)itemsOnPage.innerHTML = '<span class="topbar-itemsOnPage__span">Товаров найдено:</span> ' + e.detail;
+    });
 
     const productsViewSwitch = document.createElement('div');
     productsViewSwitch.className = 'topbar__switch';
@@ -101,26 +110,30 @@ class Catalogue {
     viewWideRadio.setAttribute('name', 'view-switch');
     viewWideRadio.setAttribute('type', 'radio');
     viewWideRadio.className = 'topbar-switch-input';
+    if (this.searchParams.get('viewGrid') === 'false') {
+      viewWideRadio.checked = true;
+    } else viewGridRadio.checked = true;
 
     viewWideRadio.addEventListener('change', () => {
       this.searchParams.set('viewGrid', 'false');
       this.productsGridView = false;
       window.location.hash = '?' + this.searchParams.toString();
-      this.productsContainer.classList.remove('products_grid')
-      this.productsContainer.classList.add('products_wide')
+      this.productsContainer.classList.remove('products_grid');
+      this.productsContainer.classList.add('products_wide');
       for (const item of this.productsContainer.children) {
-        // new ProductItem().makeWide(item)
+        item.classList.add('product_wide');
+        item.classList.remove('product_grid');
       }
-
     });
     viewGridRadio.addEventListener('change', () => {
       this.searchParams.set('viewGrid', 'true');
       this.productsGridView = true;
       window.location.hash = '?' + this.searchParams.toString();
-      this.productsContainer.classList.add('products_grid')
-      this.productsContainer.classList.remove('products_wide')
+      this.productsContainer.classList.add('products_grid');
+      this.productsContainer.classList.remove('products_wide');
       for (const item of this.productsContainer.children) {
-        // new ProductItem().makeGrid(item)
+        item.classList.remove('product_wide');
+        item.classList.add('product_grid');
       }
     });
 
@@ -145,6 +158,7 @@ class Catalogue {
   private createSelect(options: Array<string>) {
     const select = document.createElement('select');
     select.className = 'topbar__select';
+
     const firstOption = document.createElement('option');
     firstOption.textContent = 'Сортировать';
     firstOption.setAttribute('value', '');
@@ -180,33 +194,23 @@ class Catalogue {
 
   private createProducts(productsData: ProductData[]): void {
     this.productsContainer.className = 'products';
-
-    if (this.productsGridView) {
-      this.productsContainer.classList.add('products_grid');
-      this.productsContainer.classList.remove('products_wide');
-    } else {
+    if (this.searchParams.get('viewGrid') === 'false') {
       this.productsContainer.classList.remove('products_grid');
       this.productsContainer.classList.add('products_wide');
+    } else {
+      this.productsContainer.classList.add('products_grid');
+      this.productsContainer.classList.remove('products_wide');
     }
 
     for (let i = 0; i < productsData.length; i++) {
-      const item = new ProductItem(productsData[i]).getComponent();
+      const item = new ProductItem(productsData[i], this.searchParams).getComponent();
       this.productsContainer.append(item);
     }
   }
 
   private createFilters() {
-    const filters = new Filters(this.initialProducts).createComponent();
+    const filters = new Filters(this.initialProducts).createComponent(this.searchParams);
     return filters;
-  }
-
-  updateProductsData() {
-    // console.log(this.searchParams.toString())
-    // const searchParams = new URLSearchParams(document.location.hash.slice(2));
-    // this.currentProducts = this.initialProducts.filter((e) => e.category === searchParams.get('category'));
-    // // this.currentProducts = this.currentProducts.filter((e) => e.baseVehicle.some((e) => searchParams.getAll('baseVehicle')?.includes(e)))
-    // // console.log(this.currentProducts)
-    // this.createProducts(this.currentProducts);
   }
 }
 

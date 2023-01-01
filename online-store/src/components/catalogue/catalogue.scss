@@ -8,13 +8,14 @@
 .products-with-filters {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 4vw;
 }
 
 .heading-search {
   display: flex;
   align-items: center;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .search {
@@ -25,7 +26,7 @@
   border-radius: 1rem;
   width: min(40%, 400px);
   display: flex;
-  font-size: 1rem;
+  font-size: 14px;
   transition: 0.1s;
   // box-shadow: transparent;
   outline: transparent;
@@ -40,7 +41,7 @@
   outline: none;
   background-color: unset;
   max-width: 100%;
-  font-size: 1rem;
+  font-size: 14px;
   flex-grow: 1;
 }
 
@@ -57,7 +58,7 @@
 .topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-grow: 1;
   margin-bottom: 1rem;
   // border-bottom: 1px solid #bdbdbd;
@@ -68,9 +69,11 @@
   outline: none;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 14px;
   background-color: #f0f1f2;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
+  min-height: 40px;
 }
 
 .topbar__sort-btn {
@@ -79,7 +82,7 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 14px;
 }
 
 .topbar__switch {
@@ -114,6 +117,17 @@
 .topbar-switch-view__icon {
   max-width: 1.5rem;
   display: block;
+}
+
+.topbar__items-on-page {
+  margin-left: auto;
+  align-self: center;
+  padding-right: 1rem;
+  font-size: 14px;
+}
+
+.topbar-itemsOnPage__span {
+  opacity: 0.5;
 }
 
 .products-with-topbar {

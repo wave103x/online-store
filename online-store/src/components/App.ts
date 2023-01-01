@@ -21,7 +21,9 @@ class App {
     const location = window.location.hash.slice(1);
     if (this.contentToLoad && location.includes('?')) return;
     if (this.contentToLoad) this.contentToLoad.remove();
+
     const path = location.includes('?') ? location.slice(0, location.indexOf('?')) : location;
+
     switch (path) {
       case location.match(/products\/\d+/gi)?.at(0):
         this.contentToLoad = new ProductPage().getComponent();

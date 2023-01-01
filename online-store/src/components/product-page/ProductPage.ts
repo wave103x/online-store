@@ -14,7 +14,6 @@ class ProductPage {
     this._id = Number(url.substring(url.indexOf('/') + 1));
     const product = products.find((e) => e.id === this._id) as ProductData;
     this._product = product;
-    console.log(this._product);
     this.createComponent();
   }
 
@@ -28,36 +27,91 @@ class ProductPage {
     const breadcrumbs = this.createBreadcrumbs();
 
     const photoWithDescription = document.createElement('div');
-    photoWithDescription.className = 'photo-desc';
-    const slider = this.createSlider();
+    photoWithDescription.className = 'photos-description';
+    const photos = this.createPhotos();
     const description = this.createDescription();
-    photoWithDescription.append(slider, description);
+    photoWithDescription.append(photos, description);
 
     this._componentElement.append(breadcrumbs, photoWithDescription);
   }
 
-  private createSlider(): HTMLElement {
-    const slider = document.createElement('div');
-    slider.className = 'slider';
-    return slider;
+  private createPhotos(): HTMLElement {
+    const photos = document.createElement('div');
+    photos.className = 'photos';
+
+    const viewer = document.createElement('div');
+    viewer.className = 'photos__viewer';
+    const viewerImg = new Image();
+    viewerImg.className = 'photos-viewer__img';
+    viewer.append(viewerImg);
+
+    const thumbs = document.createElement('div');
+    thumbs.className = 'photos__thumbs';
+
+    const images = this._product.images;
+    if (!images) return document.createElement('div');
+    images.forEach((imageSrc, index) => {
+      const image = new Image();
+      image.src = imageSrc;
+      image.className = 'photos__thumb';
+      thumbs.append(image);
+      if (index === 0) {
+        image.classList.add('photos__thumb_hover');
+        viewerImg.src = imageSrc;
+      }
+
+      image.addEventListener('mouseover', () => {
+        viewerImg.src = imageSrc;
+        Array.from(thumbs.children).forEach((e) => e.classList.remove('photos__thumb_hover'));
+        image.classList.add('photos__thumb_hover');
+      });
+    });
+
+    photos.append(thumbs, viewer);
+    return photos;
   }
 
   private createDescription(): HTMLElement {
     const description = document.createElement('div');
     description.className = 'description';
 
-    const title = document.createElement('h1');
-    title.className = 'product__h1';
-    title.textContent = this._product.title;
+    const artikul = document.createElement('p');
+    artikul.textContent = 'Арт. ' + this._product.id.toString();
+    artikul.className = 'description__artikul';
 
-    description.append(title);
+    const title = document.createElement('h1');
+    title.className = 'description__title';
+    title.textContent = `${this._product.title} на технику ${this._product.baseVehicle}`;
+
+    const price = document.createElement('p');
+    price.textContent = this._product.price.toString() + ' руб.';
+    price.className = 'description__price';
+
+    const aviability = document.createElement('p');
+    aviability.className = 'description__aviability';
+    aviability.textContent = this._product.stock > 0 ? 'Доступно для заказа' : 'Нет в наличии';
+
+    const textDescription = document.createElement('p');
+    textDescription.textContent = this._product.description;
+    textDescription.className = 'description__text-description';
+
+    const toCartBtn = document.createElement('button');
+    toCartBtn.className = 'button description__to-cart';
+    toCartBtn.textContent = 'В корзину';
+
+    const fastBuyBtn = document.createElement('button');
+    fastBuyBtn.className = 'button description__fast-buy';
+    fastBuyBtn.textContent = 'Быстрый заказ';
+
+    description.append(artikul, title, price, aviability, toCartBtn, fastBuyBtn, textDescription);
     return description;
   }
 
   private createBreadcrumbs(): HTMLElement {
     const breadcrumbs = document.createElement('div');
-    const location = window.location.hash.slice(1);
-    breadcrumbs.textContent = location;
+    breadcrumbs.className = 'breadcrumbs';
+
+    breadcrumbs.innerHTML = `<span>Catalogue</span> <span>${this._product.category}</span> <span>${this._product.baseVehicle}</span> <span>${this._product.title}</span>`;
 
     return breadcrumbs;
   }

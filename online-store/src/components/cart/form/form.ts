@@ -1,3 +1,4 @@
+import Cart from '../Cart';
 import './form.scss';
 
 class Form {
@@ -226,7 +227,7 @@ class Form {
 
         this.value = month + '/' + date;
         if (+month <= 12 && +date <= 31) {
-          Form.valid.cvv = true;
+          Form.valid.date = true;
           cardError2.innerText = '';
           return;
         }
@@ -286,6 +287,47 @@ class Form {
     submit.type = 'submit';
     submit.className = 'button registr__submit';
     submit.value = 'Подтвердить';
+    submit.addEventListener('click', function (e) {
+      e.preventDefault();
+      let flag = true;
+      if (!Form.valid.name) {
+        textName.innerText = 'Имя и фамилия введены неправильно';
+        flag = false;
+      }
+      if (!Form.valid.number) {
+        textPhone.innerText = 'Номер введен неправильно';
+        flag = false;
+      }
+      if (!Form.valid.address) {
+        textAdr.innerText = 'Адрес введен неправильно';
+        flag = false;
+      }
+      if (!Form.valid.email) {
+        textEmail.innerText = 'Email введен неправильно';
+        flag = false;
+      }
+      if (!Form.valid.cardNumber) {
+        cardError1.innerText = 'Номер карты введен неправильно';
+        flag = false;
+      }
+      if (!Form.valid.date) {
+        cardError2.innerText = 'Дата введена неправильно';
+        flag = false;
+      }
+      if (!Form.valid.cvv) {
+        cardError3.innerText = 'CVV введен неправильно';
+        flag = false;
+      }
+      if (flag) {
+        submitLabel.innerText = 'Заказ оформлен';
+        setTimeout(() => {
+          Cart.clearItemList();
+          window.location.hash = '#';
+        }, 3000);
+      } else {
+        submitLabel.innerText = '';
+      }
+    });
     form.append(submit);
 
     return form;

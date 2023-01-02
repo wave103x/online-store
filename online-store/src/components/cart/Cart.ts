@@ -238,6 +238,10 @@ class Cart {
       this.itemList.splice(index, 1);
     }
   }
+
+  static clearItemList(): void {
+    Cart.itemList = [];
+  }
 }
 
 export default Cart;

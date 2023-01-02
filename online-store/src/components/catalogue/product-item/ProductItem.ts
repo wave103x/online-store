@@ -94,6 +94,8 @@ class ProductItem {
 
     this._componentElement.dataset.price = String(data.price);
     this._componentElement.dataset.stock = String(data.stock);
+    this._componentElement.dataset.category = String(data.category);
+    this._componentElement.dataset.baseVehicle = String(data.baseVehicle);
     this._componentElement.append(link, productProps, priceWithBtn);
   }
 }

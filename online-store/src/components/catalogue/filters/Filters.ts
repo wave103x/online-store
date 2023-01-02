@@ -44,6 +44,7 @@ class Filters {
     for (let i = 0; i < items.length; i++) {
       const filterItemLabel = document.createElement('label');
       filterItemLabel.className = 'filter-item__label';
+
       if (typeof items[i] === 'string') filterItemLabel.textContent = items[i];
       const inputBox = document.createElement('input');
       inputBox.setAttribute('type', type);
@@ -85,6 +86,11 @@ class Filters {
     if (!resultCategory.length) resultCategory = [...this.products];
 
     const productsOnPage = resultBase.filter((value) => resultCategory.includes(value));
+
+    const allOfFilter = this.products.filter(e => e[key] === label.textContent).length.toString();
+    const currentOfFilter = productsOnPage.filter(e => e[key] === label.textContent).length.toString();
+
+    label.dataset.qty = `${currentOfFilter}/${allOfFilter}`;
 
     const categoriesOnPage = [...new Set(productsOnPage.map((e) => e.category))];
     const basesOnPage = [...new Set(productsOnPage.map((e) => e.baseVehicle))];

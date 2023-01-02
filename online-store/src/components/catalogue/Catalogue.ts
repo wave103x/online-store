@@ -8,7 +8,6 @@ import FilterGeneral from './filters/FilterGeneral';
 class Catalogue {
   private readonly TAG_MAIN = 'main';
   private readonly CLASS_MAIN = 'main';
-  private productsGridView: boolean;
   private _componentElement: HTMLElement;
   private productsContainer: HTMLElement;
   private initialProducts: ProductData[];
@@ -19,7 +18,6 @@ class Catalogue {
     this._componentElement = document.createElement(this.TAG_MAIN);
     this.productsContainer = document.createElement('div');
     this.initialProducts = initialProducts;
-    this.productsGridView = true;
     this.searchParams = new URLSearchParams(window.location.hash.slice(2));
     window.addEventListener('hashchange', () => {
       this.searchParams = new URLSearchParams(window.location.hash.slice(2));
@@ -29,7 +27,7 @@ class Catalogue {
   createComponent(): HTMLElement {
     const productsWithTopBar = document.createElement('div');
     productsWithTopBar.className = 'products-with-topbar';
-    this.createProducts(this.initialProducts);
+    this.createProducts([...this.initialProducts]);
     productsWithTopBar.append(this.createTopBar(), this.productsContainer);
 
     const productsWithFilters = document.createElement('div');
@@ -92,11 +90,17 @@ class Catalogue {
 
     const itemsOnPage = document.createElement('div');
 
-    const sortSelect = this.createSelect(['Рекомендуем', 'Сначала дешевые', 'Сначала дорогие']);
+    const sortSelect = this.createSelect([
+      'Сначала дешевые',
+      'Сначала дорогие',
+      'Больше на складе',
+      'Меньше на складе',
+    ]);
 
     itemsOnPage.className = 'topbar__items-on-page';
     document.addEventListener('productsOnPage', (e) => {
-      if (e instanceof CustomEvent)itemsOnPage.innerHTML = '<span class="topbar-itemsOnPage__span">Товаров найдено:</span> ' + e.detail;
+      if (e instanceof CustomEvent)
+        itemsOnPage.innerHTML = '<span class="topbar-itemsOnPage__span">Товаров найдено:</span> ' + e.detail;
     });
 
     const productsViewSwitch = document.createElement('div');
@@ -116,7 +120,6 @@ class Catalogue {
 
     viewWideRadio.addEventListener('change', () => {
       this.searchParams.set('viewGrid', 'false');
-      this.productsGridView = false;
       window.location.hash = '?' + this.searchParams.toString();
       this.productsContainer.classList.remove('products_grid');
       this.productsContainer.classList.add('products_wide');
@@ -127,7 +130,6 @@ class Catalogue {
     });
     viewGridRadio.addEventListener('change', () => {
       this.searchParams.set('viewGrid', 'true');
-      this.productsGridView = true;
       window.location.hash = '?' + this.searchParams.toString();
       this.productsContainer.classList.add('products_grid');
       this.productsContainer.classList.remove('products_wide');
@@ -167,11 +169,34 @@ class Catalogue {
     select.append(firstOption);
 
     select.addEventListener('change', (event: Event) => this.selectHandle(event));
+
+    const sortTypes = {
+      priceDesc: 'Сначала дорогие',
+      priceAsc: 'Сначала дешевые',
+      stockDesc: 'Больше на складе',
+      stockAsc: 'Меньше на складе',
+    };
+
     for (let opt of options) {
       const option = document.createElement('option');
       option.textContent = opt;
       option.setAttribute('value', opt);
       select.append(option);
+      const urlOpt = this.searchParams.get('sort');
+      switch (urlOpt) {
+        case 'priceDesc':
+          if (option.textContent === 'Сначала дорогие') option.setAttribute('selected', 'true');
+          break;
+        case 'priceAsc':
+          if (option.textContent === 'Сначала дешевые') option.setAttribute('selected', 'true');
+          break;
+        case 'stockDesc':
+          if (option.textContent === 'Больше на складе') option.setAttribute('selected', 'true');
+          break;
+        case 'stockAsc':
+          if (option.textContent === 'Меньше на складе') option.setAttribute('selected', 'true');
+          break;
+      }
     }
     return select;
   }
@@ -179,12 +204,35 @@ class Catalogue {
   private selectHandle(event: Event) {
     const target = event.target;
     if (target instanceof HTMLSelectElement) {
+      const products = Array.from(this.productsContainer.children) as HTMLElement[];
       switch (target.value) {
         case 'Сначала дорогие':
+          products
+            .sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price))
+            .forEach((node) => this.productsContainer.append(node));
+          this.searchParams.set('sort', 'priceDesc');
+          window.location.hash = '?' + this.searchParams.toString();
           break;
         case 'Сначала дешевые':
+          products
+            .sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price))
+            .forEach((node) => this.productsContainer.append(node));
+          this.searchParams.set('sort', 'priceAsc');
+          window.location.hash = '?' + this.searchParams.toString();
           break;
-        case 'Рекомендуем':
+        case 'Больше на складе':
+          products
+            .sort((a, b) => Number(b.dataset.stock) - Number(a.dataset.stock))
+            .forEach((node) => this.productsContainer.append(node));
+          this.searchParams.set('sort', 'stockDesc');
+          window.location.hash = '?' + this.searchParams.toString();
+          break;
+        case 'Меньше на складе':
+          products
+            .sort((a, b) => Number(a.dataset.stock) - Number(b.dataset.stock))
+            .forEach((node) => this.productsContainer.append(node));
+          this.searchParams.set('sort', 'stockAsc');
+          window.location.hash = '?' + this.searchParams.toString();
           break;
         default:
           return;
@@ -202,6 +250,23 @@ class Catalogue {
       this.productsContainer.classList.remove('products_wide');
     }
 
+    switch (this.searchParams.get('sort')) {
+      case 'priceDesc':
+        productsData.sort((a, b) => Number(b.price) - Number(a.price));
+        break;
+      case 'priceAsc':
+        productsData.sort((a, b) => Number(a.price) - Number(b.price));
+        break;
+      case 'stockDesc':
+        productsData.sort((a, b) => Number(b.stock) - Number(a.stock));
+        break;
+      case 'stockAsc':
+        productsData.sort((a, b) => Number(a.stock) - Number(b.stock));
+        break;
+      default:
+        break;
+    }
+
     for (let i = 0; i < productsData.length; i++) {
       const item = new ProductItem(productsData[i], this.searchParams).getComponent();
       this.productsContainer.append(item);
@@ -210,6 +275,7 @@ class Catalogue {
 
   private createFilters() {
     const filters = new Filters(this.initialProducts).createComponent(this.searchParams);
+    
     return filters;
   }
 }

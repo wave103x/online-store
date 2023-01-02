@@ -6,11 +6,9 @@ import './filters.scss';
 
 class Filters {
   private products: ProductData[];
-  private _productsCount: number;
 
   constructor(products: ProductData[]) {
     this.products = products;
-    this._productsCount = products.length;
   }
 
   createComponent(searchParams: URLSearchParams): HTMLElement {
@@ -41,6 +39,7 @@ class Filters {
     filterTitle.className = 'filter__title';
 
     let items = [...new Set(data.map((e) => e[key] as string))];
+    const queryUrlValues = searchParams.getAll(key);
 
     for (let i = 0; i < items.length; i++) {
       const filterItemLabel = document.createElement('label');
@@ -51,7 +50,6 @@ class Filters {
       inputBox.setAttribute('name', key);
       inputBox.setAttribute('value', items[i]);
 
-      const queryUrlValues = searchParams.getAll(key);
       if (queryUrlValues.length) {
         queryUrlValues.includes(inputBox.value) ? (inputBox.checked = true) : (inputBox.checked = false);
       }
@@ -68,6 +66,14 @@ class Filters {
     }
 
     filter.prepend(filterTitle);
+
+    const newEvent = new CustomEvent(key, {
+      detail: {
+        [key]: queryUrlValues,
+      },
+    });
+    document.dispatchEvent(newEvent);
+
     return filter;
   }
 
@@ -100,7 +106,15 @@ class Filters {
         break;
     }
 
-    if (event.detail?.reset) input.checked = false;
+    if (event.detail?.reset) {
+      input.checked = false;
+      const newEvent = new CustomEvent(key, {
+        detail: {
+          [key]: [],
+        },
+      });
+      document.dispatchEvent(newEvent);
+    }
 
     const productsOnPageEvent = new CustomEvent('productsOnPage', { detail: productsOnPage.length });
     document.dispatchEvent(productsOnPageEvent);

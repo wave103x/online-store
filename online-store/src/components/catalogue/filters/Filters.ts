@@ -15,7 +15,7 @@ class Filters {
     const filters = document.createElement('sidebar');
     filters.className = 'filters';
 
-    const categoryFilter = this.createFilter('radio', ParamsToFilter.Category, this.products, searchParams);
+    const categoryFilter = this.createFilter('checkbox', ParamsToFilter.Category, this.products, searchParams);
     const baseVehicleFilter = this.createFilter('checkbox', ParamsToFilter.BaseVehicle, this.products, searchParams);
     const resetBtn = this.createButtons('reset');
     const copyBtn = this.createButtons('copy');

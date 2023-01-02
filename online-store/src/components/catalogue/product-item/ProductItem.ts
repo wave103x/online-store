@@ -16,7 +16,8 @@ class ProductItem {
     const category: string[] = event.detail?.category;
     const baseVehicle: string[] = event.detail?.baseVehicle;
 
-    const resultCat = category.length ? this._productData.category === category.join('') : true;
+    // const resultCat = category.length ? this._productData.category === category.join('') : true;
+    const resultCat = category.length ? category.includes(this._productData.category) : true;
     const resultBase = baseVehicle.length ? baseVehicle.includes(this._productData.baseVehicle) : true;
 
     if (resultBase && resultCat) {

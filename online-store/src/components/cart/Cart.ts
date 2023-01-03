@@ -52,8 +52,9 @@ class Cart {
   ];
   static productsCount: number = 3;
   static productSummary: number = 0;
-  private pageCount: number = 1;
   static pageItemCount: number = 5;
+  private static pageCount: number = 1;
+  private static currentPage: number = 1;
 
   private readonly rubleSymbol = ' &#8381;';
 
@@ -64,6 +65,9 @@ class Cart {
     (this._componentElement.querySelector('.basket__count-number') as HTMLInputElement).value =
       Cart.pageItemCount.toString();
 
+    const pageNumber = this._componentElement.querySelector('.basket_page-number') as HTMLElement;
+    pageNumber.innerText = Cart.currentPage.toString();
+
     if (Cart.itemList.length === 0) {
       const elem = document.createElement('p');
       elem.innerText = 'Здесь пока что ничего нет.';
@@ -71,8 +75,9 @@ class Cart {
       this._componentElement.innerHTML = '';
       this._componentElement.append(elem);
     } else {
-      this.addListeners();
       this.createItemList();
+      this.addListeners();
+      console.log(Cart.pageCount);
       this.createSummary();
     }
     return this._componentElement;
@@ -81,13 +86,11 @@ class Cart {
   private addListeners(): void {
     const input = this._componentElement.querySelector('.basket__count-number') as HTMLInputElement;
     input.addEventListener('change', function (): void {
-      console.log('start');
       if (+this.value > 0) {
         Cart.pageItemCount = +this.value;
 
         const cart = new Cart();
-        document.body.querySelector('.main')?.remove();
-        document.body.append(cart.createComponent());
+        cart.rebuild();
       }
     });
 
@@ -95,19 +98,43 @@ class Cart {
     button.addEventListener('click', function () {
       document.querySelector('.main')?.append(new Form().createComponent());
     });
+
+    const leftPageButton = this._componentElement.querySelector('.basket__page-left');
+    leftPageButton?.addEventListener('click', () => {
+      if (Cart.currentPage - 1 < 1) return;
+      Cart.currentPage -= 1;
+
+      const cart = new Cart();
+      cart.rebuild();
+    });
+    const rightPageButton = this._componentElement.querySelector('.basket__page-right');
+    rightPageButton?.addEventListener('click', () => {
+      if (Cart.currentPage + 1 > Cart.pageCount) return;
+      Cart.currentPage += 1;
+
+      const cart = new Cart();
+      cart.rebuild();
+    });
   }
 
   private createItemList(): void {
-    Cart.productSummary = 0;
     const basketList = this._componentElement.querySelector('.basket__list');
-    this.pageCount = Math.ceil(Cart.itemList.length / Cart.pageItemCount);
-    const itemForShow = Cart.itemList.length < Cart.pageItemCount ? Cart.itemList.length : Cart.pageItemCount;
-    for (let i = 0; i < itemForShow; i++) {
+    Cart.pageCount = Math.ceil(Cart.itemList.length / Cart.pageItemCount);
+    //const itemForShow = Cart.itemList.length < Cart.pageItemCount ? Cart.itemList.length : Cart.pageItemCount;
+
+    const min = Cart.pageItemCount * (Cart.currentPage - 1);
+    const max = Cart.currentPage === Cart.pageCount ? Cart.itemList.length : Cart.pageItemCount * Cart.currentPage;
+    for (let i = min; i < max; i++) {
       basketList?.append(this.createItem(Cart.itemList[i].product, i + 1, Cart.itemList[i].count));
     }
   }
 
   private createSummary(): void {
+    Cart.productSummary = 0;
+    Cart.itemList.forEach((item) => {
+      Cart.productSummary += item.count * item.product.price;
+    });
+
     const summary = this._componentElement.querySelector('.summary');
 
     const total = document.createElement('p');
@@ -203,10 +230,8 @@ class Cart {
     const price = document.createElement('p');
     price.classList.add('cart-item__price');
     price.innerHTML = product.price * productCount + this.rubleSymbol;
-    Cart.productSummary += product.price * productCount;
 
     aside.append(price);
-
     item.append(aside);
 
     return item;
@@ -237,10 +262,16 @@ class Cart {
       const index = this.itemList.indexOf(product);
       this.itemList.splice(index, 1);
     }
+    this.productsCount--;
   }
 
   static clearItemList(): void {
     Cart.itemList = [];
+  }
+
+  private rebuild(): void {
+    document.body.querySelector('.main')?.remove();
+    document.body.append(this.createComponent());
   }
 }
 

@@ -77,15 +77,14 @@
 }
 
 .photos {
-  height: 500px;
   display: flex;
+  gap: 2rem;
 }
 
 .photos__thumbs {
   width: 64px;
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
   gap: 1rem;
   flex-shrink: 0;
 }
@@ -102,7 +101,6 @@
 
 .photos__thumb_hover {
   opacity: 1;
-
 }
 
 .photos__viewer {
@@ -114,4 +112,18 @@
   width: 100%;
   border-radius: 0.5rem;
   object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .photos-description {
+    grid-template-columns: 1fr;
+  }
+
+  .photos {
+    flex-direction: column-reverse;
+  }
+
+  .photos__thumbs {
+    flex-direction: row;
+  }
 }

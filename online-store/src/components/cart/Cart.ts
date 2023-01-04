@@ -210,6 +210,10 @@ class Cart {
         this.itemList[this.itemList.findIndex((value) => value.product.id === item.id)].count++;
       }
       this.productsCount++;
+      this.productSummary = 0;
+      this.itemList.forEach((item) => {
+        this.productSummary += item.count * item.product.price;
+      });
     }
   }
 
@@ -223,6 +227,10 @@ class Cart {
       this.itemList.splice(index, 1);
     }
     this.productsCount--;
+    this.productSummary = 0;
+    this.itemList.forEach((item) => {
+      this.productSummary += item.count * item.product.price;
+    });
   }
 
   static clearItemList(): void {

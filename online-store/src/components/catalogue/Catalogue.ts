@@ -28,7 +28,11 @@ class Catalogue {
     const productsWithTopBar = document.createElement('div');
     productsWithTopBar.className = 'products-with-topbar';
     this.createProducts([...this.initialProducts]);
-    productsWithTopBar.append(this.createTopBar(), this.productsContainer);
+    const messageNoProducts = document.createElement('p');
+    messageNoProducts.className = 'message-no-products';
+    messageNoProducts.textContent = 'Здесь ничего нет';
+    messageNoProducts.hidden = true;
+    productsWithTopBar.append(this.createTopBar(messageNoProducts), this.productsContainer, messageNoProducts);
 
     const productsWithFilters = document.createElement('div');
     productsWithFilters.className = 'products-with-filters';
@@ -84,7 +88,7 @@ class Catalogue {
     return searchForm;
   }
 
-  private createTopBar(): HTMLElement {
+  private createTopBar(messageNoProducts: HTMLElement): HTMLElement {
     const topBar = document.createElement('section');
     topBar.className = 'topbar';
 
@@ -99,8 +103,10 @@ class Catalogue {
 
     itemsOnPage.className = 'topbar__items-on-page';
     document.addEventListener('productsOnPage', (e) => {
-      if (e instanceof CustomEvent)
+      if (e instanceof CustomEvent) {
         itemsOnPage.innerHTML = '<span class="topbar-itemsOnPage__span">Товаров найдено:</span> ' + e.detail;
+        !e.detail ? messageNoProducts.hidden = false : messageNoProducts.hidden = true;
+      }
     });
 
     const productsViewSwitch = document.createElement('div');
@@ -275,7 +281,6 @@ class Catalogue {
 
   private createFilters() {
     const filters = new Filters(this.initialProducts).createComponent(this.searchParams);
-    
     return filters;
   }
 }

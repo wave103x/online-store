@@ -87,8 +87,8 @@ class Filters {
 
     const productsOnPage = resultBase.filter((value) => resultCategory.includes(value));
 
-    const allOfFilter = this.products.filter(e => e[key] === label.textContent).length.toString();
-    const currentOfFilter = productsOnPage.filter(e => e[key] === label.textContent).length.toString();
+    const allOfFilter = this.products.filter((e) => e[key] === label.textContent).length.toString();
+    const currentOfFilter = productsOnPage.filter((e) => e[key] === label.textContent).length.toString();
 
     label.dataset.qty = `${currentOfFilter}/${allOfFilter}`;
 
@@ -182,12 +182,17 @@ class Filters {
         });
         break;
       case 'copy':
-        button.textContent = 'Копировать фильтрацию';
+        const text = document.createElement('span');
+        text.textContent = 'Копировать фильтрацию'
         button.className = 'filter__btn filter_copy-btn';
         icon.src = require('../../../assets/icons/icon-copy.svg') as string;
-        button.prepend(icon);
+        button.prepend(icon, text);
         button.addEventListener('click', () => {
           navigator.clipboard.writeText(window.location.href);
+          text.textContent = 'Успешно';
+          setTimeout(() => {
+            text.textContent = 'Копировать фильтрацию';
+          }, 1000);
         });
         break;
     }

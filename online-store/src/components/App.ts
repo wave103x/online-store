@@ -24,12 +24,12 @@ class App {
         this.contentToLoad = document.createElement('div');
         document.title = 'Магазин навесного оборудования для вашей спецтехники.';
         break;
-      default:
-        /*
-        document.title = 'ой! 404'
-        this.contentToLoad = new Page404().createComponent();
-        */
+      case 'cart':
+        document.title = 'Корзина';
         this.contentToLoad = new Cart().createComponent();
+      default:
+        document.title = 'ой! 404';
+        this.contentToLoad = new Page404().createComponent();
         break;
     }
     this._componentElement.append(this.contentToLoad);

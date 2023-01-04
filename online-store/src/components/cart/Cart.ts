@@ -6,51 +6,8 @@ import ProductInCart from '../types/ProductInCart';
 class Cart {
   private _componentElement!: HTMLElement;
   private html: string = require('./cart.html').default;
-  private static itemList: ProductInCart[] = [
-    {
-      count: 2,
-      product: {
-        id: 1,
-        title: 'Ковш стандартный',
-        description:
-          'Ковши стандартныйе применяются для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/куб.м',
-        price: 120000,
-        stock: 4,
-        baseVehicle: ['Caterpillar', 'Komatsu'],
-        category: 'Ковш экскаваторный',
-        thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
-        images: [
-          'https://i.dummyjson.com/data/products/1/1.jpg',
-          'https://i.dummyjson.com/data/products/1/2.jpg',
-          'https://i.dummyjson.com/data/products/1/3.jpg',
-          'https://i.dummyjson.com/data/products/1/4.jpg',
-          'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
-        ],
-      },
-    },
-    {
-      count: 1,
-      product: {
-        id: 2,
-        title: 'Ковш стандартный',
-        description:
-          'Ковши стандартныйе применяются для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/куб.м',
-        price: 120000,
-        stock: 4,
-        baseVehicle: ['Caterpillar', 'Komatsu'],
-        category: 'Ковш экскаваторный',
-        thumbnail: 'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
-        images: [
-          'https://i.dummyjson.com/data/products/1/1.jpg',
-          'https://i.dummyjson.com/data/products/1/2.jpg',
-          'https://i.dummyjson.com/data/products/1/3.jpg',
-          'https://i.dummyjson.com/data/products/1/4.jpg',
-          'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
-        ],
-      },
-    },
-  ];
-  static productsCount: number = 3;
+  private static itemList: ProductInCart[] = [];
+  static productsCount: number = 0;
   static productSummary: number = 0;
   static pageItemCount: number = 5;
   private static pageCount: number = 1;
@@ -77,7 +34,6 @@ class Cart {
     } else {
       this.createItemList();
       this.addListeners();
-      console.log(Cart.pageCount);
       this.createSummary();
     }
     return this._componentElement;
@@ -86,12 +42,13 @@ class Cart {
   private addListeners(): void {
     const input = this._componentElement.querySelector('.basket__count-number') as HTMLInputElement;
     input.addEventListener('change', function (): void {
-      if (+this.value > 0) {
-        Cart.pageItemCount = +this.value;
-
-        const cart = new Cart();
-        cart.rebuild();
+      if (+this.value < 1) {
+        this.value = '1';
       }
+      Cart.pageItemCount = +this.value;
+
+      const cart = new Cart();
+      cart.rebuild();
     });
 
     const button = this._componentElement.querySelector('.summary__button') as HTMLElement;

@@ -1,6 +1,153 @@
+@import '../../sass/main.scss';
+
 .main {
-  width: 90%;
-  height: 50vh;
+  max-width: 1440px;
   margin: 1rem auto;
-  background-color: tomato;
+}
+
+.products-with-filters {
+  display: flex;
+  align-items: flex-start;
+  gap: 4vw;
+}
+
+.heading-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.search {
+  margin-left: auto;
+  padding: 0.5rem 0.5rem;
+  padding-left: 1rem;
+  background-color: $light-gray;
+  border-radius: 1rem;
+  width: min(40%, 400px);
+  display: flex;
+  font-size: 14px;
+  transition: 0.1s;
+  // box-shadow: transparent;
+  outline: transparent;
+  &:has(.search__input:focus) {
+    // box-shadow: 0 4px 4px rgba($color: #000000, $alpha: 0.2);
+    outline: 3px solid rgb(155, 221, 243);
+  }
+}
+
+.search__input {
+  border: none;
+  outline: none;
+  background-color: unset;
+  max-width: 100%;
+  font-size: 14px;
+  flex-grow: 1;
+}
+
+.search__btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: $main-gray;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  font-weight: 500;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+  // border-bottom: 1px solid #bdbdbd;
+}
+
+.topbar__select {
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid $medium-gray;
+  border-radius: 0.5rem;
+  min-height: 40px;
+}
+
+.topbar__sort-btn {
+  background: none;
+  color: $main-gray;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.topbar__switch {
+  display:  flex;
+  border-radius: 0.25rem;
+  background-color: #f0f1f2;
+  padding: 0.25rem;
+}
+
+.topbar-switch-label {
+  padding: 1rem;
+  cursor: pointer;
+  & img {
+    opacity: 0.4;
+  }
+}
+
+.topbar-switch-label:has(input:checked) {
+  background-color: white;
+  & img {
+    opacity: 1;
+  }
+}
+
+.topbar-switch-input {
+  appearance: none;
+  position: absolute;
+  margin: 0;
+  background-color: #fff;
+}
+
+.topbar-switch-view__icon {
+  max-width: 1.5rem;
+  display: block;
+}
+
+.topbar__items-on-page {
+  margin-left: auto;
+  align-self: center;
+  padding-right: 1rem;
+  font-size: 14px;
+}
+
+.topbar-itemsOnPage__span {
+  opacity: 0.5;
+}
+
+.products-with-topbar {
+  width: 100%;
+}
+
+.products {
+  display: grid;
+  gap: 1rem;
+}
+
+.products_wide {
+  grid-template-columns: unset;
+}
+
+.products_grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.message-no-products {
+  font-weight: bold;
+  text-align: center;
 }

@@ -1,0 +1,484 @@
+[
+  {
+    "id": 1,
+    "title": "Отвал VM D",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 680000,
+    "stock": 7,
+    "baseVehicle": "Doosan",
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "https://i.imgur.com/U0zfprB.jpg",
+    "images": ["https://i.imgur.com/6Qf1pem.jpg", "https://i.imgur.com/qsOF72u.jpg"]
+  },
+  {
+    "id": 2,
+    "title": "Ковш VM К",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 320000,
+    "stock": 3,
+    "baseVehicle": "Кранэкс",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Отвал VM C",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 230000,
+    "stock": 0,
+    "baseVehicle": "Caterpillar",
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "https://i.imgur.com/U0zfprB.jpg",
+    "images": ["https://i.imgur.com/6Qf1pem.jpg", "https://i.imgur.com/qsOF72u.jpg"]
+  },
+  {
+    "id": 4,
+    "title": "Рабочее оборудование VM H",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 8500000,
+    "stock": 6,
+    "baseVehicle": "Hitachi",
+    "category": "Стрелы, рукояти",
+    "thumbnail": "https://i.imgur.com/VCrzjYe.jpg",
+    "images": ["https://i.imgur.com/hQkjGEx.jpg", "https://i.imgur.com/P2HvbTG.jpg", "https://i.imgur.com/AamO4HT.jpg"]
+  },
+  {
+    "id": 5,
+    "title": "Оси, пальцы втулки VM J",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 9200,
+    "stock": 6,
+    "baseVehicle": "John Deere",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 6,
+    "title": "Отвал VM C",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 710000,
+    "stock": 8,
+    "baseVehicle": "Caterpillar",
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "https://i.imgur.com/U0zfprB.jpg",
+    "images": ["https://i.imgur.com/6Qf1pem.jpg", "https://i.imgur.com/qsOF72u.jpg"]
+  },
+  {
+    "id": 7,
+    "title": "Бетонолом VM L",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 260000,
+    "stock": 6,
+    "baseVehicle": "Liebherr",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 8,
+    "title": "Гусеничная цепь VM C",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 4300000,
+    "stock": 7,
+    "baseVehicle": "Case",
+    "category": "Ходовая часть",
+    "thumbnail": "https://i.imgur.com/ewuCfwC.jpg",
+    "images": ["https://i.imgur.com/wcVOdDS.jpg", "https://i.imgur.com/Ujg8Uee.jpg"]
+  },
+  {
+    "id": 9,
+    "title": "Ковш VM J",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 300000,
+    "stock": 1,
+    "baseVehicle": "John Deere",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Бетонолом VM К",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 890000,
+    "stock": 1,
+    "baseVehicle": "Кранэкс",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 11,
+    "title": "Бетонолом VM C",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 20000,
+    "stock": 5,
+    "baseVehicle": "Caterpillar",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 12,
+    "title": "Гусеничная цепь VM D",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 6600000,
+    "stock": 3,
+    "baseVehicle": "Doosan",
+    "category": "Ходовая часть",
+    "thumbnail": "https://i.imgur.com/ewuCfwC.jpg",
+    "images": ["https://i.imgur.com/wcVOdDS.jpg", "https://i.imgur.com/Ujg8Uee.jpg"]
+  },
+  {
+    "id": 13,
+    "title": "Система зубьев VM H",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 7300,
+    "stock": 1,
+    "baseVehicle": "Hitachi",
+    "category": "Коронки, адаптеры",
+    "thumbnail": "https://i.imgur.com/i92H2II.jpg",
+    "images": ["https://i.imgur.com/iNi15LT.png", "https://i.imgur.com/Fu6vQuO.jpg"]
+  },
+  {
+    "id": 14,
+    "title": "Бетонолом VM D",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 200000,
+    "stock": 3,
+    "baseVehicle": "Doosan",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 15,
+    "title": "Бетонолом VM К",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 660000,
+    "stock": 7,
+    "baseVehicle": "Кранэкс",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 16,
+    "title": "Бетонолом VM K",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 420000,
+    "stock": 8,
+    "baseVehicle": "Komatsu",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 17,
+    "title": "Ковш VM C",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 30000,
+    "stock": 7,
+    "baseVehicle": "Case",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Отвал VM V",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 660000,
+    "stock": 11,
+    "baseVehicle": "Volvo",
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "https://i.imgur.com/U0zfprB.jpg",
+    "images": ["https://i.imgur.com/6Qf1pem.jpg", "https://i.imgur.com/qsOF72u.jpg"]
+  },
+  {
+    "id": 19,
+    "title": "Оси, пальцы втулки VM H",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 2700,
+    "stock": 10,
+    "baseVehicle": "Hyundai",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 20,
+    "title": "Ковш VM D",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 560000,
+    "stock": 4,
+    "baseVehicle": "Doosan",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Ковш VM D",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 780000,
+    "stock": 11,
+    "baseVehicle": "Doosan",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Ковш VM К",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 300000,
+    "stock": 12,
+    "baseVehicle": "Кранэкс",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Оси, пальцы втулки VM D",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 2300,
+    "stock": 2,
+    "baseVehicle": "Doosan",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 24,
+    "title": "Гусеничная цепь VM J",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 7600000,
+    "stock": 6,
+    "baseVehicle": "JCB",
+    "category": "Ходовая часть",
+    "thumbnail": "https://i.imgur.com/ewuCfwC.jpg",
+    "images": ["https://i.imgur.com/wcVOdDS.jpg", "https://i.imgur.com/Ujg8Uee.jpg"]
+  },
+  {
+    "id": 25,
+    "title": "Отвал VM J",
+    "description": "Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.",
+    "price": 830000,
+    "stock": 9,
+    "baseVehicle": "JCB",
+    "category": "Бульдозерные отвалы",
+    "thumbnail": "https://i.imgur.com/U0zfprB.jpg",
+    "images": ["https://i.imgur.com/6Qf1pem.jpg", "https://i.imgur.com/qsOF72u.jpg"]
+  },
+  {
+    "id": 26,
+    "title": "Оси, пальцы втулки VM V",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 1700,
+    "stock": 2,
+    "baseVehicle": "Volvo",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 27,
+    "title": "Бетонолом VM H",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 780000,
+    "stock": 10,
+    "baseVehicle": "Hitachi",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 28,
+    "title": "Гусеничная цепь VM J",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 1800000,
+    "stock": 6,
+    "baseVehicle": "John Deere",
+    "category": "Ходовая часть",
+    "thumbnail": "https://i.imgur.com/ewuCfwC.jpg",
+    "images": ["https://i.imgur.com/wcVOdDS.jpg", "https://i.imgur.com/Ujg8Uee.jpg"]
+  },
+  {
+    "id": 29,
+    "title": "Оси, пальцы втулки VM K",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 100,
+    "stock": 8,
+    "baseVehicle": "Komatsu",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 30,
+    "title": "Система зубьев VM C",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 5300,
+    "stock": 0,
+    "baseVehicle": "Caterpillar",
+    "category": "Коронки, адаптеры",
+    "thumbnail": "https://i.imgur.com/i92H2II.jpg",
+    "images": ["https://i.imgur.com/iNi15LT.png", "https://i.imgur.com/Fu6vQuO.jpg"]
+  },
+  {
+    "id": 31,
+    "title": "Рабочее оборудование VM J",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 6400000,
+    "stock": 11,
+    "baseVehicle": "JCB",
+    "category": "Стрелы, рукояти",
+    "thumbnail": "https://i.imgur.com/VCrzjYe.jpg",
+    "images": ["https://i.imgur.com/hQkjGEx.jpg", "https://i.imgur.com/P2HvbTG.jpg", "https://i.imgur.com/AamO4HT.jpg"]
+  },
+  {
+    "id": 32,
+    "title": "Рабочее оборудование VM H",
+    "description": "Стандартное навесное оборудование необходимо для выполнения операций с грунтами средней плотности. ",
+    "price": 1800000,
+    "stock": 7,
+    "baseVehicle": "Hyundai",
+    "category": "Стрелы, рукояти",
+    "thumbnail": "https://i.imgur.com/VCrzjYe.jpg",
+    "images": ["https://i.imgur.com/hQkjGEx.jpg", "https://i.imgur.com/P2HvbTG.jpg", "https://i.imgur.com/AamO4HT.jpg"]
+  },
+  {
+    "id": 33,
+    "title": "Система зубьев VM L",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 6400,
+    "stock": 6,
+    "baseVehicle": "Liebherr",
+    "category": "Коронки, адаптеры",
+    "thumbnail": "https://i.imgur.com/i92H2II.jpg",
+    "images": ["https://i.imgur.com/iNi15LT.png", "https://i.imgur.com/Fu6vQuO.jpg"]
+  },
+  {
+    "id": 34,
+    "title": "Оси, пальцы втулки VM D",
+    "description": "Пальцы (оси) для экскаваторов строительного класса (эксплуатационной массой до 75 тонн) производятся из стали 40Х.",
+    "price": 8000,
+    "stock": 10,
+    "baseVehicle": "Doosan",
+    "category": "Оси, втулки",
+    "thumbnail": "https://i.imgur.com/cyO8AIx.jpg",
+    "images": ["https://i.imgur.com/4kb2ISw.jpg", "https://i.imgur.com/rVutm8s.jpg"]
+  },
+  {
+    "id": 35,
+    "title": "Бетонолом VM L",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 450000,
+    "stock": 2,
+    "baseVehicle": "Liebherr",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 36,
+    "title": "Бетонолом VM H",
+    "description": "Оборудование состоят из двух челюстей и крепится к рукояти экскаватора. В действие приводится гидроцилиндром ковша.",
+    "price": 120000,
+    "stock": 12,
+    "baseVehicle": "Hitachi",
+    "category": "Бетоноломы",
+    "thumbnail": "https://i.imgur.com/JX1zGof.jpg",
+    "images": ["https://i.imgur.com/DlD18R7.jpg", "https://i.imgur.com/s5uE8G9.jpg", "https://i.imgur.com/jgE3ELW.jpg"]
+  },
+  {
+    "id": 37,
+    "title": "Система зубьев VM J",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 2200,
+    "stock": 12,
+    "baseVehicle": "John Deere",
+    "category": "Коронки, адаптеры",
+    "thumbnail": "https://i.imgur.com/i92H2II.jpg",
+    "images": ["https://i.imgur.com/iNi15LT.png", "https://i.imgur.com/Fu6vQuO.jpg"]
+  },
+  {
+    "id": 38,
+    "title": "Система зубьев VM D",
+    "description": "В наличии и под заказ широкий спектр запасных частей на спецтехнику различных серий и модификаций.",
+    "price": 6500,
+    "stock": 8,
+    "baseVehicle": "Doosan",
+    "category": "Коронки, адаптеры",
+    "thumbnail": "https://i.imgur.com/i92H2II.jpg",
+    "images": ["https://i.imgur.com/iNi15LT.png", "https://i.imgur.com/Fu6vQuO.jpg"]
+  },
+  {
+    "id": 39,
+    "title": "Ковш VM J",
+    "description": "Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).",
+    "price": 430000,
+    "stock": 3,
+    "baseVehicle": "JCB",
+    "category": "Ковши экскаваторные",
+    "thumbnail": "https://i.imgur.com/TAHhLzs.jpg",
+    "images": [
+      "https://i.imgur.com/ZqT5tBa.jpg",
+      "https://i.imgur.com/wrHKJlY.jpg",
+      "https://i.imgur.com/sVC1Nv9.jpg",
+      "https://i.imgur.com/P3lwyYJ.jpg",
+      "https://i.imgur.com/p03QHwR.jpg"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Гусеничная цепь VM D",
+    "description": "Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.",
+    "price": 2900000,
+    "stock": 12,
+    "baseVehicle": "Doosan",
+    "category": "Ходовая часть",
+    "thumbnail": "https://i.imgur.com/ewuCfwC.jpg",
+    "images": ["https://i.imgur.com/wcVOdDS.jpg", "https://i.imgur.com/Ujg8Uee.jpg"]
+  }
+]

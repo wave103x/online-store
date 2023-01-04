@@ -1,0 +1,61 @@
+.filters {
+  width: 256px;
+  flex-shrink: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter__title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.filter_stealth {
+  opacity: 0.5;
+}
+
+.filter__btn {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+  & img {
+    max-width: 1.5rem;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+    opacity: 0.5;
+  }
+  &:hover {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #aaa;
+  }
+}
+
+.filter-item__label {
+  font-size: 14px;
+  position: relative;
+  & input {
+    margin-right: 0.5rem;
+    opacity: 0.8;
+  }
+  &::after {
+    content: attr(data-qty);
+    position: absolute;
+    right: 0;
+    top: 3px
+  }
+}

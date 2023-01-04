@@ -120,7 +120,11 @@ class Cart {
     info.append(itemNumberInList);
 
     const img = new Image();
-    img.src = product.thumbnail;
+    if (product.thumbnail) {
+      img.src = product.thumbnail;
+    } else {
+      img.src = '#';
+    }
     img.alt = 'photo';
     img.className = 'cart-item__img';
     info.append(img);

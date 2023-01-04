@@ -77,7 +77,6 @@ class Cart {
   private createItemList(): void {
     const basketList = this._componentElement.querySelector('.basket__list');
     Cart.pageCount = Math.ceil(Cart.itemList.length / Cart.pageItemCount);
-    //const itemForShow = Cart.itemList.length < Cart.pageItemCount ? Cart.itemList.length : Cart.pageItemCount;
 
     const min = Cart.pageItemCount * (Cart.currentPage - 1);
     const max = Cart.currentPage === Cart.pageCount ? Cart.itemList.length : Cart.pageItemCount * Cart.currentPage;
@@ -102,7 +101,7 @@ class Cart {
 
     const count = document.createElement('p');
     count.classList.add('summary__count');
-    count.innerText = 'Количество: ' + Cart.productsCount;
+    count.innerText = 'Количество на странице: ' + Cart.productsCount;
 
     summary?.prepend(count);
   }

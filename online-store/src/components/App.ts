@@ -27,6 +27,7 @@ class App {
       case 'cart':
         document.title = 'Корзина';
         this.contentToLoad = new Cart().createComponent();
+        break;
       default:
         document.title = 'ой! 404';
         this.contentToLoad = new Page404().createComponent();

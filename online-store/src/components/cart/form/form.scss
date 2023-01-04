@@ -1,9 +1,10 @@
 .dark-block {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100%;
   backdrop-filter: blur(5px);
   z-index: 20;
   display: block;
@@ -35,6 +36,10 @@
     margin: 0;
     margin-bottom: 30px;
     font-size: 2em;
+  }
+
+  &__submit {
+    width: 70%;
   }
 }
 
@@ -96,6 +101,7 @@
     color: rgb(248, 112, 112);
     margin: 0;
     font-size: 1em;
+    text-align: center;
   }
 
   &_true {
@@ -110,4 +116,51 @@
   border: 1px solid #bdbdbd;
   border-radius: 7px;
   font-size: 1.1rem;
+}
+
+@media screen and (max-width: 650px) {
+  .registr {
+    top: 50px;
+    width: 70%;
+    padding: 30px 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .registr {
+    width: 80%;
+    padding: 30px 10px;
+  }
+
+  .registr__details {
+    font-size: 1.6rem;
+  }
+
+  .input {
+    width: 80%;
+    font-size: 0.9rem;
+    padding: 7px 5px;
+  }
+
+  .input__label {
+    width: 80%;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .card {
+    padding: 20px 10px;
+  }
+
+  .card-input {
+    font-size: 0.9rem;
+  }
+
+  .card__number {
+    width: 140px;
+  }
+
+  .card_wrong {
+    font-size: 0.9rem;
+  }
 }

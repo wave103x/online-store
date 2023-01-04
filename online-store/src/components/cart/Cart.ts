@@ -6,8 +6,45 @@ import ProductInCart from '../types/ProductInCart';
 class Cart {
   private _componentElement!: HTMLElement;
   private html: string = require('./cart.html').default;
-  private static itemList: ProductInCart[] = [];
-  static productsCount: number = 0;
+  static itemList: ProductInCart[] = [
+    {
+      count: 2,
+      product: {
+        id: 1,
+        title: 'Отвал VM D',
+        description:
+          'Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.',
+        price: 680000,
+        stock: 7,
+        baseVehicle: 'Doosan',
+        category: 'Бульдозерные отвалы',
+        thumbnail: 'https://i.imgur.com/U0zfprB.jpg',
+        images: ['https://i.imgur.com/6Qf1pem.jpg', 'https://i.imgur.com/qsOF72u.jpg'],
+      },
+    },
+    {
+      count: 1,
+      product: {
+        id: 2,
+        title: 'Ковш VM К',
+        description:
+          'Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).',
+        price: 320000,
+        stock: 3,
+        baseVehicle: 'Кранэкс',
+        category: 'Ковши экскаваторные',
+        thumbnail: 'https://i.imgur.com/TAHhLzs.jpg',
+        images: [
+          'https://i.imgur.com/ZqT5tBa.jpg',
+          'https://i.imgur.com/wrHKJlY.jpg',
+          'https://i.imgur.com/sVC1Nv9.jpg',
+          'https://i.imgur.com/P3lwyYJ.jpg',
+          'https://i.imgur.com/p03QHwR.jpg',
+        ],
+      },
+    },
+  ];
+  static productsCount: number = 3;
   static productSummary: number = 0;
   static pageItemCount: number = 5;
   private static pageCount: number = 1;
@@ -17,7 +54,7 @@ class Cart {
 
   createComponent(): HTMLElement {
     this._componentElement = document.createElement('main');
-    this._componentElement.className = 'main';
+    this._componentElement.className = 'main main-basket';
     this._componentElement.innerHTML = this.html;
     (this._componentElement.querySelector('.basket__count-number') as HTMLInputElement).value =
       Cart.pageItemCount.toString();
@@ -101,7 +138,7 @@ class Cart {
 
     const count = document.createElement('p');
     count.classList.add('summary__count');
-    count.innerText = 'Количество на странице: ' + Cart.productsCount;
+    count.innerText = 'Количество: ' + Cart.productsCount;
 
     summary?.prepend(count);
   }
@@ -157,8 +194,8 @@ class Cart {
       Cart.deleteItem(+id);
 
       const cart = new Cart();
-      document.body.querySelector('.main')?.remove();
-      document.body.append(cart.createComponent());
+      Cart.currentPage = 1;
+      cart.rebuild();
     });
     controls.append(less);
 
@@ -180,8 +217,7 @@ class Cart {
       }
 
       const cart = new Cart();
-      document.body.querySelector('.main')?.remove();
-      document.body.append(cart.createComponent());
+      cart.rebuild();
     });
     controls.append(more);
 
@@ -210,10 +246,7 @@ class Cart {
         this.itemList[this.itemList.findIndex((value) => value.product.id === item.id)].count++;
       }
       this.productsCount++;
-      this.productSummary = 0;
-      this.itemList.forEach((item) => {
-        this.productSummary += item.count * item.product.price;
-      });
+      this.calculateSummary();
     }
   }
 
@@ -227,14 +260,22 @@ class Cart {
       this.itemList.splice(index, 1);
     }
     this.productsCount--;
-    this.productSummary = 0;
-    this.itemList.forEach((item) => {
-      this.productSummary += item.count * item.product.price;
-    });
+    this.calculateSummary();
   }
 
   static clearItemList(): void {
     Cart.itemList = [];
+  }
+
+  static isInCart(id: Number): boolean {
+    return !!this.itemList.find((value) => value.product.id === id);
+  }
+
+  private static calculateSummary() {
+    this.productSummary = 0;
+    this.itemList.forEach((item) => {
+      this.productSummary += item.count * item.product.price;
+    });
   }
 
   private rebuild(): void {

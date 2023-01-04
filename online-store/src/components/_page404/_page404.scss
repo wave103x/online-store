@@ -40,3 +40,23 @@
 .not-found_img {
   width: 30%;
 }
+
+@media screen and (max-width: 1220px) {
+  .not-found_img {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .not-found_title {
+    font-size: 7rem;
+  }
+
+  .not-found_desc {
+    font-size: 1.8rem;
+  }
+
+  .not-found_img {
+    width: 70%;
+  }
+}

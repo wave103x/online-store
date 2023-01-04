@@ -8,6 +8,6 @@ type ProductData = {
   category: string;
   thumbnail?: string;
   images?: string[];
-}
+};
 
 export default ProductData;

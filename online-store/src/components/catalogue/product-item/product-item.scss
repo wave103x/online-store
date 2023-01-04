@@ -1,4 +1,6 @@
-p {
+@import '../../../sass/main.scss';
+
+.product_props p {
   padding: 4px 0;
   margin: 4px 0;
 }
@@ -74,3 +76,9 @@ p {
 .product__price-btn {
   margin-top: auto;
 }
+
+.product__button_added {
+  background-color: unset;
+  color: #222;
+}
+

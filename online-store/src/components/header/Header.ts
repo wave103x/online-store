@@ -1,16 +1,24 @@
+import Cart from '../cart/Cart';
 import './header.scss';
 
 class Header {
   private _componentElement: HTMLElement;
+  private _cartSum = document.createElement('p');
+  private _currentSum = Cart.productSummary;
+  private _currentCount = Cart.productsCount;
 
   constructor() {
     this._componentElement = document.createElement('header');
   }
 
-  createComponent(): HTMLElement {
+  getComponent(): HTMLElement {
+    this.createComponent();
+    return this._componentElement;
+  }
+
+  private createComponent(): void {
     this._componentElement.append(this.createLogo(), this.createCart());
     this._componentElement.className = 'header';
-    return this._componentElement;
   }
 
   private createLogo(): HTMLElement {
@@ -30,23 +38,35 @@ class Header {
     const cartDiv = document.createElement('div');
     cartDiv.className = 'cart';
 
-    const logoDiv = document.createElement('div');
+    const link = document.createElement('a');
+    link.href = `#cart`;
 
-    logoDiv.dataset.cartCount = '5';
-
-    logoDiv.className = 'cart__logo';
-
-    const cartAmount = document.createElement('p');
-    cartAmount.className = 'cart__amount';
-    cartAmount.textContent = '254 000';
+    this._cartSum.className = 'cart__amount';
+    this._cartSum.textContent = this._currentSum.toString();
 
     const logoCart = new Image();
-    logoDiv.append(logoCart);
-
     logoCart.src = require('../../assets/icons/cart_logo.svg') as string;
-    cartDiv.append(cartAmount, logoDiv);
+
+    const logoDiv = document.createElement('div');
+    logoDiv.className = 'cart__logo';
+    logoDiv.dataset.cartCount = this._currentCount.toString();
+    logoDiv.append(logoCart);
+    link.append(logoDiv);
+
+    cartDiv.append(this._cartSum, link);
+
     return cartDiv;
   }
+
+  updateState(sum: number, count: number) {
+    // this._cartSum.textContent = sum.toString(); // починить
+    const cartSum = document.querySelector('.cart__amount');
+    if (cartSum) cartSum.textContent = sum.toString();
+
+    const cartCount = document.querySelector('.cart__logo');
+    if (cartCount instanceof HTMLElement) cartCount.dataset.cartCount = count.toString();
+  }
+
 }
 
 export default Header;

@@ -114,7 +114,7 @@ async function write() {
       title: title[category] + ' VM ' + baseVehicle[0],
       description: descriptions[category],
       price: price(prices[category]),
-      stock: random(0, 12),
+      stock: random(1, 12),
       baseVehicle: baseVehicle,
       category: category,
       thumbnail: imgs[thumbName],
@@ -140,7 +140,7 @@ async function insertImgs(category) {
 function price(digits) {
   let num = 10;
   digits > 2 ? (num = 100) : (num = 10);
-  return Math.trunc(Math.abs(Math.random() - 1) * 100) * 10 ** (digits - 2);
+  return Math.trunc(Math.abs(Math.random() - 1) * 100) * 10 ** (digits - 2) || 100;
 }
 
 function random(min, max) {

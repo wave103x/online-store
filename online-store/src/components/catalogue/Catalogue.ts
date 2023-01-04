@@ -7,7 +7,7 @@ import FilterGeneral from './filters/FilterGeneral';
 
 class Catalogue {
   private readonly TAG_MAIN = 'main';
-  private readonly CLASS_MAIN = 'main';
+  private readonly CLASS_MAIN = 'main-catalogue';
   private _componentElement: HTMLElement;
   private productsContainer: HTMLElement;
   private initialProducts: ProductData[];

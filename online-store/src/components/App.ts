@@ -13,7 +13,7 @@ class App {
   }
 
   init(): void {
-    const header = new Header().createComponent();
+    const header = new Header().getComponent();
     this._componentElement.prepend(header);
     this.renderContent();
   }

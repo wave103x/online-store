@@ -1,3 +1,4 @@
+import Header from '../header/Header';
 import './cart.scss';
 import Form from './form/form';
 import ProductData from '../types/ProductData';
@@ -6,13 +7,12 @@ import ProductInCart from '../types/ProductInCart';
 class Cart {
   private _componentElement!: HTMLElement;
   private html: string = require('./cart.html').default;
-  private static itemList: ProductInCart[] = [];
+  static itemList: ProductInCart[] = [];
   static productsCount: number = 0;
   static productSummary: number = 0;
   static pageItemCount: number = 5;
   private static pageCount: number = 1;
   private static currentPage: number = 1;
-
   private readonly rubleSymbol = ' &#8381;';
 
   createComponent(): HTMLElement {
@@ -101,7 +101,7 @@ class Cart {
 
     const count = document.createElement('p');
     count.classList.add('summary__count');
-    count.innerText = 'Количество на странице: ' + Cart.productsCount;
+    count.innerText = 'Количество: ' + Cart.productsCount;
 
     summary?.prepend(count);
   }
@@ -210,7 +210,12 @@ class Cart {
         this.itemList[this.itemList.findIndex((value) => value.product.id === item.id)].count++;
       }
       this.productsCount++;
+      this.productSummary = 0;
+      this.itemList.forEach((item) => {
+        this.productSummary += item.count * item.product.price;
+      });
     }
+    new Header().updateState(this.productSummary, this.productsCount);
   }
 
   static deleteItem(id: Number): void {
@@ -223,6 +228,12 @@ class Cart {
       this.itemList.splice(index, 1);
     }
     this.productsCount--;
+    this.productSummary = 0;
+    this.itemList.forEach((item) => {
+      this.productSummary += item.count * item.product.price;
+    });
+    new Header().updateState(this.productSummary, this.productsCount);
+
   }
 
   static clearItemList(): void {
@@ -232,6 +243,9 @@ class Cart {
   private rebuild(): void {
     document.body.querySelector('.main')?.remove();
     document.body.append(this.createComponent());
+  }
+  static isInCart(id: Number): boolean {
+    return !!this.itemList.find((value) => value.product.id === id);
   }
 }
 

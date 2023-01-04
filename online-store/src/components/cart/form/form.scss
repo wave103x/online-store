@@ -1,0 +1,113 @@
+.dark-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  z-index: 20;
+  display: block;
+  cursor: pointer;
+}
+
+.registr {
+  padding: 40px 60px;
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background-color: #f2f3f5;
+  display: block;
+  flex-direction: column;
+  align-items: center;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__details {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 2em;
+  }
+}
+
+.input__label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.label_wrong {
+  color: rgb(248, 112, 112);
+  font-size: 1em;
+}
+
+.input {
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid #bdbdbd;
+  border-radius: 7px;
+  font-size: 1.3rem;
+}
+
+.card {
+  border: 1px solid #bdbdbd;
+  border-radius: 10px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  &__img {
+    width: 30px;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__number {
+    width: 200px;
+  }
+
+  &__date,
+  &__cvv {
+    width: 90px;
+  }
+
+  &_wrong {
+    color: rgb(248, 112, 112);
+    margin: 0;
+    font-size: 1em;
+  }
+
+  &_true {
+    color: rgb(149, 235, 156);
+    font-size: 1.3em;
+  }
+}
+
+.card-input {
+  padding: 5px;
+  background-color: transparent;
+  border: 1px solid #bdbdbd;
+  border-radius: 7px;
+  font-size: 1.1rem;
+}

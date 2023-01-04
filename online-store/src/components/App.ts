@@ -2,6 +2,7 @@ import Page404 from './_page404/page404';
 import Header from './header/Header';
 import Catalogue from './catalogue/Catalogue';
 import ProductPage from './product-page/ProductPage';
+import Cart from './cart/Cart';
 
 class App {
   private _componentElement = document.body;
@@ -31,6 +32,10 @@ class App {
       case '':
         this.contentToLoad = new Catalogue().createComponent();
         document.title = 'Магазин навесного оборудования для вашей спецтехники.';
+        break;
+      case 'cart':
+        document.title = 'Корзина';
+        this.contentToLoad = new Cart().createComponent();
         break;
       default:
         document.title = 'ой! 404';

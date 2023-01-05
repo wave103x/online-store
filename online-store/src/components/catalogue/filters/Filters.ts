@@ -17,15 +17,100 @@ class Filters {
 
     const categoryFilter = this.createFilter('checkbox', ParamsToFilter.Category, this.products, searchParams);
     const baseVehicleFilter = this.createFilter('checkbox', ParamsToFilter.BaseVehicle, this.products, searchParams);
+    const priceFIlter = this.createRange(ParamsToFilter.Price, this.products, searchParams);
     const resetBtn = this.createButtons('reset');
     const copyBtn = this.createButtons('copy');
 
-    filters.append(copyBtn, resetBtn, categoryFilter, baseVehicleFilter);
+    filters.append(copyBtn, resetBtn, categoryFilter, baseVehicleFilter, priceFIlter);
     return filters;
   }
 
+  private createRange(key: keyof ProductData, data: ProductData[], searchParams: URLSearchParams) {
+    const filterName = key === 'price' ? 'Цена' : key === 'stock' ? 'На складе' : null;
+    const filter = document.createElement('div');
+    filter.className = 'filter';
+
+    const filterTitle = document.createElement('p');
+    filterTitle.textContent = filterName;
+    filterTitle.className = 'filter__title';
+
+    const values = data.map((e) => e[key]) as number[];
+    values.sort((a, b) => a - b);
+    const min = values[0];
+    const max = values[values.length - 1];
+    const step = (max - min) / 50;
+
+    const inputL = document.createElement('input');
+    inputL.className = 'filter__range';
+    inputL.setAttribute('type', 'range');
+    inputL.setAttribute('min', min.toString());
+    inputL.setAttribute('max', max.toString());
+    inputL.setAttribute('value', min.toString());
+    inputL.setAttribute('step', step.toString());
+
+    const inputR = document.createElement('input');
+    inputR.className = 'filter__range';
+    inputR.setAttribute('type', 'range');
+    inputR.setAttribute('min', min.toString());
+    inputR.setAttribute('max', max.toString());
+    inputR.setAttribute('value', max.toString());
+    inputR.setAttribute('step', step.toString());
+
+    const labelL = document.createElement('label');
+    labelL.textContent = inputL.getAttribute('min');
+    inputL.addEventListener('input', (e) => this.rangeHandler(e, inputL, labelL, key, false, min, max));
+
+    const labelR = document.createElement('label');
+    labelR.textContent = inputR.getAttribute('max');
+    inputR.addEventListener('input', (e) => this.rangeHandler(e, inputR, labelR, key, true, min, max));
+    inputR.addEventListener('eventGeneral', (e) => this.filterConnect(<CustomEvent>e, key, inputR, labelR));
+
+    const labelsContainer = document.createElement('div');
+    labelsContainer.className = 'filter__labels';
+    labelsContainer.append(labelL, labelR);
+
+    const rangeContainer = document.createElement('div');
+    rangeContainer.className = 'filter_ranges';
+    rangeContainer.append(inputL, inputR);
+
+    filter.append(labelsContainer, rangeContainer);
+    return filter;
+  }
+
+  private rangeHandler(
+    event: Event,
+    input: HTMLInputElement,
+    label: HTMLLabelElement,
+    key: keyof ProductData,
+    right: boolean,
+    min: number,
+    max: number,
+  ) {
+    label.textContent = input.value;
+
+    const searchParams = new URLSearchParams(document.location.hash.slice(2));
+
+    const currentPrice = searchParams.get('price');
+    let currentLeft = currentPrice?.toString().slice(0, currentPrice?.toString().indexOf('-')) || min.toString();
+    let currentRight = currentPrice?.toString().slice(currentPrice?.toString().indexOf('-') + 1) || max.toString();
+
+    right ? currentRight = input.value : currentLeft = input.value;
+
+    const value = `${currentLeft}-${currentRight}`;
+    searchParams.set(key, value);
+
+    window.location.hash = '?' + searchParams.toString();
+
+    const newEvent = new CustomEvent(key, {
+      detail: {
+        [key]: value,
+      },
+    });
+    document.dispatchEvent(newEvent);
+  }
+
   private createFilter(
-    type: 'checkbox' | 'radio' | 'slide',
+    type: 'checkbox' | 'radio',
     key: keyof ProductData,
     data: ProductData[],
     searchParams: URLSearchParams
@@ -111,7 +196,6 @@ class Filters {
         }
         break;
     }
-
     if (event.detail?.reset) {
       input.checked = false;
       const newEvent = new CustomEvent(key, {
@@ -151,12 +235,11 @@ class Filters {
 
     window.location.hash = '?' + searchParams.toString();
     const newEvent = new CustomEvent(key, {
-      bubbles: true,
       detail: {
         [key]: currentParams,
       },
     });
-    elem.dispatchEvent(newEvent);
+    document.dispatchEvent(newEvent);
   }
 
   private createButtons(type: 'reset' | 'copy'): HTMLElement {
@@ -183,7 +266,7 @@ class Filters {
         break;
       case 'copy':
         const text = document.createElement('span');
-        text.textContent = 'Копировать фильтрацию'
+        text.textContent = 'Копировать фильтрацию';
         button.className = 'filter__btn filter_copy-btn';
         icon.src = require('../../../assets/icons/icon-copy.svg') as string;
         button.prepend(icon, text);

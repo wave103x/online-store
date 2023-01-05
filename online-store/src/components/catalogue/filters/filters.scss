@@ -1,5 +1,7 @@
+@import '../../../sass/main.scss';
+
 .filters {
-  width: 256px;
+  width: 16rem;
   flex-shrink: 0;
   padding: 0;
   display: flex;
@@ -57,5 +59,39 @@
     position: absolute;
     right: 0;
     top: 3px
+  }
+}
+
+.filter__labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter_ranges {
+  position: relative;
+  background: red;
+}
+
+.filter__range {
+  background: #ddd;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  pointer-events: none;
+  &::-webkit-slider-thumb {
+    background: none;
+    pointer-events: auto;
+    color: $main-gray;
+    background: $main-gray;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    z-index: 2;
+  }
+  &::-webkit-slider-runnable-track {
+    pointer-events: none;
+    z-index: 1;
   }
 }

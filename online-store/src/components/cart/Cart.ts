@@ -1,3 +1,4 @@
+import Header from '../header/Header';
 import './cart.scss';
 import Form from './form/form';
 import ProductData from '../types/ProductData';
@@ -6,55 +7,27 @@ import ProductInCart from '../types/ProductInCart';
 class Cart {
   private _componentElement!: HTMLElement;
   private html: string = require('./cart.html').default;
-  static itemList: ProductInCart[] = [
-    {
-      count: 2,
-      product: {
-        id: 1,
-        title: 'Отвал VM D',
-        description:
-          'Отвал – ключевой механизм любой бульдозерной машины. Изготовленный из стали повышенной прочности и имеющий изогнутый эргономичный профиль основной рабочий инструмент дает возможность быстро выполнять задачи различной сложности во время строительно-дорожных, коммунальных и других работ.',
-        price: 680000,
-        stock: 7,
-        baseVehicle: 'Doosan',
-        category: 'Бульдозерные отвалы',
-        thumbnail: 'https://i.imgur.com/U0zfprB.jpg',
-        images: ['https://i.imgur.com/6Qf1pem.jpg', 'https://i.imgur.com/qsOF72u.jpg'],
-      },
-    },
-    {
-      count: 1,
-      product: {
-        id: 2,
-        title: 'Ковш VM К',
-        description:
-          'Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).',
-        price: 320000,
-        stock: 3,
-        baseVehicle: 'Кранэкс',
-        category: 'Ковши экскаваторные',
-        thumbnail: 'https://i.imgur.com/TAHhLzs.jpg',
-        images: [
-          'https://i.imgur.com/ZqT5tBa.jpg',
-          'https://i.imgur.com/wrHKJlY.jpg',
-          'https://i.imgur.com/sVC1Nv9.jpg',
-          'https://i.imgur.com/P3lwyYJ.jpg',
-          'https://i.imgur.com/p03QHwR.jpg',
-        ],
-      },
-    },
-  ];
-  static productsCount: number = 3;
+  static itemList: ProductInCart[] = [];
+  static productsCount: number = 0;
   static productSummary: number = 0;
   static pageItemCount: number = 5;
   private static pageCount: number = 1;
   private static currentPage: number = 1;
-
   private readonly rubleSymbol = ' &#8381;';
+  static _header: Header;
+
+  getHeader(header: Header) {
+    Cart._header = header;
+  }
 
   createComponent(): HTMLElement {
-    this._componentElement = document.createElement('main');
-    this._componentElement.className = 'main main-basket';
+    const main = document.querySelector('.main-basket') as HTMLElement;
+    if (main) {
+      this._componentElement = main;
+    } else {
+      this._componentElement = document.createElement('main');
+      this._componentElement.className = 'main main-basket';
+    }
     this._componentElement.innerHTML = this.html;
     (this._componentElement.querySelector('.basket__count-number') as HTMLInputElement).value =
       Cart.pageItemCount.toString();
@@ -73,6 +46,12 @@ class Cart {
       this.addListeners();
       this.createSummary();
     }
+
+    if (localStorage.getItem('doModale')) {
+      this._componentElement.append(new Form().createComponent());
+      localStorage.removeItem('doModale');
+    }
+
     return this._componentElement;
   }
 
@@ -150,6 +129,10 @@ class Cart {
 
     const info = document.createElement('div');
     info.classList.add('cart-item__info');
+    const link = document.createElement('a');
+    link.href = `#products/${product.id}`;
+    link.className = 'cart-item__link';
+    link.append(info);
 
     const itemNumberInList = document.createElement('p');
     itemNumberInList.classList.add('cart-item__number');
@@ -171,7 +154,7 @@ class Cart {
     name.innerText = product.title;
     info.append(name);
 
-    item.append(info);
+    item.append(link);
 
     const aside = document.createElement('div');
     aside.classList.add('cart-item__aside');
@@ -248,6 +231,7 @@ class Cart {
       this.productsCount++;
       this.calculateSummary();
     }
+    Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
   static deleteItem(id: Number): void {
@@ -279,8 +263,7 @@ class Cart {
   }
 
   private rebuild(): void {
-    document.body.querySelector('.main')?.remove();
-    document.body.append(this.createComponent());
+    this.createComponent();
   }
 }
 

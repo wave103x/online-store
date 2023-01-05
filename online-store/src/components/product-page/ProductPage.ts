@@ -1,3 +1,4 @@
+import Cart from '../cart/Cart';
 import products from '../../data/data.json';
 import type ProductData from '../types/ProductData';
 import './product-page.scss';
@@ -7,6 +8,7 @@ class ProductPage {
   private _componentElement: HTMLElement;
   private _id: number;
   private _product: ProductData;
+  private _inCart: boolean;
 
   constructor() {
     this._componentElement = document.createElement(this.TAG_MAIN);
@@ -14,6 +16,8 @@ class ProductPage {
     this._id = Number(url.substring(url.indexOf('/') + 1));
     const product = products.find((e) => e.id === this._id) as ProductData;
     this._product = product;
+    document.title = this._product.title;
+    this._inCart = Cart.isInCart(this._product.id);
     this.createComponent();
   }
 
@@ -22,7 +26,7 @@ class ProductPage {
   }
 
   private createComponent(): void {
-    this._componentElement.className = 'main';
+    this._componentElement.className = 'main-catalogue';
 
     const breadcrumbs = this.createBreadcrumbs();
 
@@ -96,12 +100,31 @@ class ProductPage {
     textDescription.className = 'description__text-description';
 
     const toCartBtn = document.createElement('button');
+    toCartBtn.textContent = Cart.isInCart(this._product.id) ? 'В корзине' : 'В корзину';
     toCartBtn.className = 'button description__to-cart';
-    toCartBtn.textContent = 'В корзину';
+    this._inCart ? toCartBtn.classList.add('product__button_added') : null;
+    toCartBtn.addEventListener('click', () => {
+      if (this._inCart) {
+        toCartBtn.textContent = 'В корзину';
+        this._inCart = false;
+        Cart.deleteItem(this._product.id);
+        toCartBtn.classList.remove('product__button_added');
+      } else {
+        this._inCart = true;
+        Cart.addItem(this._product);
+        toCartBtn.textContent = 'В корзине';
+        toCartBtn.classList.add('product__button_added');
+      }
+    });
 
     const fastBuyBtn = document.createElement('button');
     fastBuyBtn.className = 'button description__fast-buy';
     fastBuyBtn.textContent = 'Быстрый заказ';
+    fastBuyBtn.addEventListener('click', () => {
+      localStorage.setItem('doModale', 'true');
+      Cart.addItem(this._product);
+      window.location.hash = '#cart';
+    });
 
     description.append(artikul, title, price, aviability, toCartBtn, fastBuyBtn, textDescription);
     return description;

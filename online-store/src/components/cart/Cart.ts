@@ -237,6 +237,10 @@ class Cart {
       this.itemList.forEach((item) => {
         this.productSummary += item.count * item.product.price;
       });
+      this.productSummary = 0;
+      this.itemList.forEach((item) => {
+        this.productSummary += item.count * item.product.price;
+      });
     }
     Cart._header.updateState(this.productSummary, this.productsCount);
   }

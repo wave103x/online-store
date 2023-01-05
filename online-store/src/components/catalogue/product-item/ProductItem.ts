@@ -19,12 +19,14 @@ class ProductItem {
     const category: string[] = event.detail?.category;
     const baseVehicle: string[] = event.detail?.baseVehicle;
     const price: string = event.detail?.price;
+    const stock: string = event.detail?.stock;
 
     const resultCat = category.length ? category.includes(this._productData.category) : true;
     const resultBase = baseVehicle.length ? baseVehicle.includes(this._productData.baseVehicle) : true;
-    const resultPrice = price ? this._productData.price > Number(price.slice(0, price.indexOf('-'))) && this._productData.price < Number(price.slice(price.indexOf('-') + 1)) : true;
+    const resultPrice = price ? this._productData.price >= Number(price.slice(0, price.indexOf('-'))) && this._productData.price <= Number(price.slice(price.indexOf('-') + 1)) : true;
+    const resultStock = stock ? this._productData.stock >= Number(stock.slice(0, stock.indexOf('-'))) && this._productData.stock <= Number(stock.slice(stock.indexOf('-') + 1)) : true;
 
-    if (resultBase && resultCat && resultPrice) {
+    if (resultBase && resultCat && resultPrice && resultStock) {
       this._componentElement.style.display = 'flex';
       this._isHidden = false;
     } else {

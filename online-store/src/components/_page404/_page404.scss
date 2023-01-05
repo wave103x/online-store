@@ -34,7 +34,10 @@
   margin-bottom: 30px;
   font-size: 1.6rem;
   text-decoration: none;
-  color: black;
+}
+
+.not-found .not-found_button {
+  font-size: 1.4rem;
 }
 
 .not-found_img {
@@ -48,14 +51,6 @@
 }
 
 @media screen and (max-width: 650px) {
-  .not-found_title {
-    font-size: 7rem;
-  }
-
-  .not-found_desc {
-    font-size: 1.8rem;
-  }
-
   .not-found_img {
     width: 70%;
   }

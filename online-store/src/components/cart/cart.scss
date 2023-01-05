@@ -97,7 +97,6 @@
   &__info {
     display: flex;
     align-items: center;
-    width: 70%;
     cursor: pointer;
   }
 
@@ -151,7 +150,9 @@
     font-size: 1.2rem;
     margin: 0;
   }
+
   &__link {
+    width: 70%;
     text-decoration: none;
     color: black;
   }
@@ -185,8 +186,9 @@
     font-size: 1.3rem;
   }
 
-  &__button {
+  & &__button {
     margin-top: 50px;
+    font-size: 1.2rem;
   }
 }
 
@@ -245,14 +247,6 @@
 }
 
 @media screen and (max-width: 500px) {
-  .basket__count {
-    font-size: 1.3rem;
-  }
-
-  .basket__page {
-    font-size: 1.3rem;
-  }
-
   .cart-item {
     flex-wrap: wrap;
     justify-content: center;
@@ -277,14 +271,6 @@
 
   .cart-item__aside {
     flex-direction: row;
-  }
-
-  .cart-item__max-amount {
-    font-size: 1.1rem;
-  }
-
-  .cart-item__price {
-    font-size: 1.1rem;
   }
 }
 

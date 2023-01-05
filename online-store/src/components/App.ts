@@ -15,6 +15,7 @@ class App {
   }
 
   init(): void {
+    Cart.setValues();
     const header = new Header();
     this._cart.getHeader(header);
     this._componentElement.prepend(header.getComponent());

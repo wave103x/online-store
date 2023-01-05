@@ -231,6 +231,7 @@ class Cart {
       this.productsCount++;
       this.calculateSummary();
     }
+    this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
@@ -245,6 +246,8 @@ class Cart {
     }
     this.productsCount--;
     this.calculateSummary();
+    this.saveValues();
+    Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
   static clearItemList(): void {
@@ -255,11 +258,32 @@ class Cart {
     return !!this.itemList.find((value) => value.product.id === id);
   }
 
+  static setValues(): void {
+    const itemList = localStorage.getItem('itemList');
+    if (itemList) {
+      this.itemList = JSON.parse(localStorage.getItem('itemList') as string);
+    }
+    const productSummary = localStorage.getItem('productSummary');
+    if (productSummary) {
+      this.productSummary = JSON.parse(localStorage.getItem('productSummary') as string);
+    }
+    const productsCount = localStorage.getItem('productsCount');
+    if (productsCount) {
+      this.productsCount = JSON.parse(localStorage.getItem('productsCount') as string);
+    }
+  }
+
   private static calculateSummary() {
     this.productSummary = 0;
     this.itemList.forEach((item) => {
       this.productSummary += item.count * item.product.price;
     });
+  }
+
+  private static saveValues(): void {
+    localStorage.setItem('itemList', JSON.stringify(this.itemList));
+    localStorage.setItem('productSummary', JSON.stringify(this.productSummary));
+    localStorage.setItem('productsCount', JSON.stringify(this.productsCount));
   }
 
   private rebuild(): void {

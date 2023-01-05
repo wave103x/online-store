@@ -52,6 +52,7 @@ class Catalogue {
         detail: {
           category: this.searchParams.getAll('category') || [],
           baseVehicle: this.searchParams.getAll('baseVehicle') || [],
+          price: this.searchParams.get('price') || '',
         },
       })
     );

@@ -108,18 +108,23 @@ class ProductPage {
         toCartBtn.textContent = 'В корзину';
         this._inCart = false;
         Cart.deleteItem(this._product.id);
-        toCartBtn.classList.remove('product__button_added')
+        toCartBtn.classList.remove('product__button_added');
       } else {
         this._inCart = true;
         Cart.addItem(this._product);
         toCartBtn.textContent = 'В корзине';
-        toCartBtn.classList.add('product__button_added')
+        toCartBtn.classList.add('product__button_added');
       }
     });
 
     const fastBuyBtn = document.createElement('button');
     fastBuyBtn.className = 'button description__fast-buy';
     fastBuyBtn.textContent = 'Быстрый заказ';
+    fastBuyBtn.addEventListener('click', () => {
+      localStorage.setItem('doModale', 'true');
+      Cart.addItem(this._product);
+      window.location.hash = '#cart';
+    });
 
     description.append(artikul, title, price, aviability, toCartBtn, fastBuyBtn, textDescription);
     return description;

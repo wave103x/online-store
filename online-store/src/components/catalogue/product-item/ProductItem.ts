@@ -10,19 +10,21 @@ class ProductItem {
 
   constructor(productData: ProductData, searchParams: URLSearchParams) {
     this._productData = productData;
+    this._inCart = Cart.isInCart(this._productData.id);
     this.createElement(this._productData, searchParams);
     document.addEventListener('eventGeneral', (event) => this.updateState(<CustomEvent>event));
-    this._inCart = Cart.isInCart(this._productData.id);
   }
 
   private updateState(event: CustomEvent) {
     const category: string[] = event.detail?.category;
     const baseVehicle: string[] = event.detail?.baseVehicle;
+    const price: string = event.detail?.price;
 
     const resultCat = category.length ? category.includes(this._productData.category) : true;
     const resultBase = baseVehicle.length ? baseVehicle.includes(this._productData.baseVehicle) : true;
+    const resultPrice = price ? this._productData.price > Number(price.slice(0, price.indexOf('-'))) && this._productData.price < Number(price.slice(price.indexOf('-') + 1)) : true;
 
-    if (resultBase && resultCat) {
+    if (resultBase && resultCat && resultPrice) {
       this._componentElement.style.display = 'flex';
       this._isHidden = false;
     } else {
@@ -87,12 +89,10 @@ class ProductItem {
     productProps.append(linkTitle, category, stock, baseVehicle);
 
     const addToCartBtn = document.createElement('button');
-    addToCartBtn.textContent = Cart.isInCart(this._productData.id) ? 'В корзине' : 'В корзину';
+    addToCartBtn.textContent = this._inCart ? 'В корзине' : 'В корзину';
     addToCartBtn.className = 'button product__button';
 
-    // console.log(this._inCart)
-
-    Cart.isInCart(this._productData.id) ? addToCartBtn.classList.add('product__button_added') : null;
+    this._inCart ? addToCartBtn.classList.add('product__button_added') : null;
     addToCartBtn.addEventListener('click', () => {
       if (this._inCart) {
         addToCartBtn.textContent = 'В корзину';

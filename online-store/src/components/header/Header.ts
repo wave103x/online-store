@@ -4,6 +4,7 @@ import './header.scss';
 class Header {
   private _componentElement: HTMLElement;
   private _cartSum = document.createElement('p');
+  private _logoDiv = document.createElement('div');
   private _currentSum = Cart.productSummary;
   private _currentCount = Cart.productsCount;
 
@@ -47,11 +48,10 @@ class Header {
     const logoCart = new Image();
     logoCart.src = require('../../assets/icons/cart_logo.svg') as string;
 
-    const logoDiv = document.createElement('div');
-    logoDiv.className = 'cart__logo';
-    logoDiv.dataset.cartCount = this._currentCount.toString();
-    logoDiv.append(logoCart);
-    link.append(logoDiv);
+    this._logoDiv.className = 'cart__logo';
+    this._logoDiv.dataset.cartCount = this._currentCount.toString();
+    this._logoDiv.append(logoCart);
+    link.append(this._logoDiv);
 
     cartDiv.append(this._cartSum, link);
 
@@ -59,12 +59,8 @@ class Header {
   }
 
   updateState(sum: number, count: number) {
-    // this._cartSum.textContent = sum.toString(); // починить
-    const cartSum = document.querySelector('.cart__amount');
-    if (cartSum) cartSum.textContent = sum.toString();
-
-    const cartCount = document.querySelector('.cart__logo');
-    if (cartCount instanceof HTMLElement) cartCount.dataset.cartCount = count.toString();
+    this._cartSum.textContent = sum.toString();
+    this._logoDiv.dataset.cartCount = count.toString();
   }
 
 }

@@ -1,10 +1,12 @@
 class FilterGeneral {
   private _category: string[] = [];
   private _baseVehicle: string[] = [];
+  private _price: string = '';
 
   constructor() {
-    document.addEventListener('baseVehicle', (event) => this.baseHandler.call(this, <CustomEvent>event));
+    document.addEventListener('baseVehicle', (event) => {this.baseHandler.call(this, <CustomEvent>event)});
     document.addEventListener('category', (event) => this.categoryHandler.call(this, <CustomEvent>event));
+    document.addEventListener('price', (event) => this.priceHandler.call(this, <CustomEvent>event));
   }
 
   private generateEvent() {
@@ -12,6 +14,7 @@ class FilterGeneral {
       detail: {
         category: this._category,
         baseVehicle: this._baseVehicle,
+        price: this._price,
       },
     });
     document.dispatchEvent(newEvent);
@@ -22,6 +25,10 @@ class FilterGeneral {
   }
   private categoryHandler(event: CustomEvent) {
     this._category = event.detail?.category;
+    this.generateEvent();
+  }
+  private priceHandler(event: CustomEvent) {
+    this._price = event.detail?.price;
     this.generateEvent();
   }
 }

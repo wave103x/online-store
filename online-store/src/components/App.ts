@@ -7,19 +7,24 @@ import Cart from './cart/Cart';
 class App {
   private _componentElement = document.body;
   private contentToLoad!: HTMLElement;
+  private _cart: Cart;
 
   constructor() {
     window.addEventListener('hashchange', () => this.renderContent());
+    this._cart = new Cart();
   }
 
   init(): void {
-    const header = new Header().createComponent();
-    this._componentElement.prepend(header);
+    const header = new Header();
+    this._cart.getHeader(header);
+    this._componentElement.prepend(header.getComponent());
     this.renderContent();
   }
 
   private renderContent(): void {
     const location = window.location.hash.slice(1);
+    const main = document.querySelector('.main-basket') as HTMLElement;
+    if (main) main.remove();
     if (this.contentToLoad && location.includes('?')) return;
     if (this.contentToLoad) this.contentToLoad.remove();
 
@@ -35,7 +40,7 @@ class App {
         break;
       case 'cart':
         document.title = 'Корзина';
-        this.contentToLoad = new Cart().createComponent();
+        this.contentToLoad = this._cart.createComponent();
         break;
       default:
         document.title = 'ой! 404';

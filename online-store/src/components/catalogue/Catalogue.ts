@@ -7,7 +7,7 @@ import FilterGeneral from './filters/FilterGeneral';
 
 class Catalogue {
   private readonly TAG_MAIN = 'main';
-  private readonly CLASS_MAIN = 'main';
+  private readonly CLASS_MAIN = 'main-catalogue';
   private _componentElement: HTMLElement;
   private productsContainer: HTMLElement;
   private initialProducts: ProductData[];
@@ -52,6 +52,7 @@ class Catalogue {
         detail: {
           category: this.searchParams.getAll('category') || [],
           baseVehicle: this.searchParams.getAll('baseVehicle') || [],
+          price: this.searchParams.get('price') || '',
         },
       })
     );

@@ -1,3 +1,4 @@
+import Header from '../header/Header';
 import './cart.scss';
 import Form from './form/form';
 import ProductData from '../types/ProductData';
@@ -6,18 +7,27 @@ import ProductInCart from '../types/ProductInCart';
 class Cart {
   private _componentElement!: HTMLElement;
   private html: string = require('./cart.html').default;
-  private static itemList: ProductInCart[] = [];
+  static itemList: ProductInCart[] = [];
   static productsCount: number = 0;
   static productSummary: number = 0;
   static pageItemCount: number = 5;
   private static pageCount: number = 1;
   private static currentPage: number = 1;
-
   private readonly rubleSymbol = ' &#8381;';
+  static _header: Header;
+
+  getHeader(header: Header) {
+    Cart._header = header;
+  }
 
   createComponent(): HTMLElement {
-    this._componentElement = document.createElement('main');
-    this._componentElement.className = 'main';
+    const main = document.querySelector('.main-basket') as HTMLElement;
+    if (main) {
+      this._componentElement = main;
+    } else {
+      this._componentElement = document.createElement('main');
+      this._componentElement.className = 'main main-basket';
+    }
     this._componentElement.innerHTML = this.html;
     (this._componentElement.querySelector('.basket__count-number') as HTMLInputElement).value =
       Cart.pageItemCount.toString();
@@ -36,6 +46,12 @@ class Cart {
       this.addListeners();
       this.createSummary();
     }
+
+    if (localStorage.getItem('doModale')) {
+      this._componentElement.append(new Form().createComponent());
+      localStorage.removeItem('doModale')
+    }
+
     return this._componentElement;
   }
 
@@ -55,6 +71,8 @@ class Cart {
     button.addEventListener('click', function () {
       document.querySelector('.main')?.append(new Form().createComponent());
     });
+
+
 
     const leftPageButton = this._componentElement.querySelector('.basket__page-left');
     leftPageButton?.addEventListener('click', () => {
@@ -101,7 +119,7 @@ class Cart {
 
     const count = document.createElement('p');
     count.classList.add('summary__count');
-    count.innerText = 'Количество на странице: ' + Cart.productsCount;
+    count.innerText = 'Количество: ' + Cart.productsCount;
 
     summary?.prepend(count);
   }
@@ -113,6 +131,11 @@ class Cart {
 
     const info = document.createElement('div');
     info.classList.add('cart-item__info');
+    // info.addEventListener('click', () => )
+    const link = document.createElement('a');
+    link.href = `#products/${product.id}`;
+    link.className = 'cart-item__link';
+    link.append(info);
 
     const itemNumberInList = document.createElement('p');
     itemNumberInList.classList.add('cart-item__number');
@@ -134,7 +157,7 @@ class Cart {
     name.innerText = product.title;
     info.append(name);
 
-    item.append(info);
+    item.append(link);
 
     const aside = document.createElement('div');
     aside.classList.add('cart-item__aside');
@@ -210,7 +233,12 @@ class Cart {
         this.itemList[this.itemList.findIndex((value) => value.product.id === item.id)].count++;
       }
       this.productsCount++;
+      this.productSummary = 0;
+      this.itemList.forEach((item) => {
+        this.productSummary += item.count * item.product.price;
+      });
     }
+    Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
   static deleteItem(id: Number): void {
@@ -223,6 +251,11 @@ class Cart {
       this.itemList.splice(index, 1);
     }
     this.productsCount--;
+    this.productSummary = 0;
+    this.itemList.forEach((item) => {
+      this.productSummary += item.count * item.product.price;
+    });
+    Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
   static clearItemList(): void {
@@ -230,8 +263,11 @@ class Cart {
   }
 
   private rebuild(): void {
-    document.body.querySelector('.main')?.remove();
-    document.body.append(this.createComponent());
+    // document.body.querySelector('.main')?.remove();
+    this.createComponent();
+  }
+  static isInCart(id: Number): boolean {
+    return !!this.itemList.find((value) => value.product.id === id);
   }
 }
 

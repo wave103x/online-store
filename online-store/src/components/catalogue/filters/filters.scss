@@ -1,12 +1,13 @@
 @import '../../../sass/main.scss';
 
 .filters {
-  width: 16rem;
+  // width: 16rem;
   flex-shrink: 0;
   padding: 0;
   display: flex;
   gap: 2rem;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .filter {

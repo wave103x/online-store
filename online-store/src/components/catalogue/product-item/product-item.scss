@@ -1,8 +1,8 @@
 @import '../../../sass/main.scss';
 
 .product_props p {
-  padding: 4px 0;
-  margin: 4px 0;
+  // padding: 4px 0;
+  margin: 6px 0;
 }
 
 .product {
@@ -51,18 +51,20 @@
   }
 }
 
-.product__category {
+.product__category, .product__stock, .product__baseVehicle {
   opacity: 0.6;
 }
 
 .product__price {
   font-weight: bold;
   margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
   &::after {
     content: 'за шт с НДС';
     font-weight: normal;
     opacity: 0.6;
     display: block;
+    line-height: 1.5rem;
   }
 }
 

@@ -11,7 +11,7 @@ class ProductPage {
   private _inCart: boolean;
 
   constructor() {
-    this._componentElement = document.createElement(this.TAG_MAIN);
+    this._componentElement = document.createElement('div');
     const url = window.location.hash;
     this._id = Number(url.substring(url.indexOf('/') + 1));
     const product = products.find((e) => e.id === this._id) as ProductData;

@@ -1,5 +1,9 @@
 @import '../../sass/main.scss';
 
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
 .main-catalogue {
   max-width: 1440px;
   margin: 1rem auto;
@@ -43,14 +47,11 @@
   flex-grow: 1;
 }
 
-.search__btn {
-  cursor: pointer;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: $main-gray;
-  color: white;
+button.search__btn {
   padding: 0.5rem 0.75rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 50%;
+  background-color: $medium-gray;
 }
 
 .topbar {

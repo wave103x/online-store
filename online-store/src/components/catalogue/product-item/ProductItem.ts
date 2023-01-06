@@ -20,13 +20,26 @@ class ProductItem {
     const baseVehicle: string[] = event.detail?.baseVehicle;
     const price: string = event.detail?.price;
     const stock: string = event.detail?.stock;
+    const search: string = event.detail.search?.trim().toLowerCase();
 
     const resultCat = category.length ? category.includes(this._productData.category) : true;
     const resultBase = baseVehicle.length ? baseVehicle.includes(this._productData.baseVehicle) : true;
-    const resultPrice = price ? this._productData.price >= Number(price.slice(0, price.indexOf('-'))) && this._productData.price <= Number(price.slice(price.indexOf('-') + 1)) : true;
-    const resultStock = stock ? this._productData.stock >= Number(stock.slice(0, stock.indexOf('-'))) && this._productData.stock <= Number(stock.slice(stock.indexOf('-') + 1)) : true;
+    const resultPrice = price
+      ? this._productData.price >= Number(price.slice(0, price.indexOf('-'))) &&
+        this._productData.price <= Number(price.slice(price.indexOf('-') + 1))
+      : true;
+    const resultStock = stock
+      ? this._productData.stock >= Number(stock.slice(0, stock.indexOf('-'))) &&
+        this._productData.stock <= Number(stock.slice(stock.indexOf('-') + 1))
+      : true;
 
-    if (resultBase && resultCat && resultPrice && resultStock) {
+    const resultSearch =
+      this._productData.title.toLowerCase().includes(search) ||
+      this._productData.category.toLowerCase().includes(search) ||
+      this._productData.baseVehicle.toLowerCase().includes(search) ||
+      this._productData.price.toString().includes(search) ||
+      this._productData.stock.toString().includes(search);
+    if (resultBase && resultCat && resultPrice && resultStock && resultSearch) {
       this._componentElement.style.display = 'flex';
       this._isHidden = false;
     } else {

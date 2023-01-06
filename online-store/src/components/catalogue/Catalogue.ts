@@ -1,9 +1,9 @@
 import Filters from './filters/Filters';
-import './catalogue.scss';
 import initialProducts from '../../data/data.json';
 import type ProductData from '../types/ProductData';
 import ProductItem from './product-item/ProductItem';
 import FilterGeneral from './filters/FilterGeneral';
+import './catalogue.scss';
 
 class Catalogue {
   private readonly TAG_MAIN = 'main';
@@ -54,6 +54,7 @@ class Catalogue {
           baseVehicle: this.searchParams.getAll('baseVehicle') || [],
           price: this.searchParams.get('price') || '',
           stock: this.searchParams.get('stock') || '',
+          search: this.searchParams.get('search') || '',
         },
       })
     );
@@ -72,6 +73,7 @@ class Catalogue {
     const searchForm = document.createElement('form');
     const searchInput = document.createElement('input');
     const searchBtn = document.createElement('button');
+    searchBtn.style.opacity = '0.5';
 
     searchForm.setAttribute('method', 'get');
     searchForm.setAttribute('action', '');
@@ -82,12 +84,53 @@ class Catalogue {
     searchInput.setAttribute('name', 'search-text');
     searchInput.setAttribute('placeholder', 'Поиск по каталогу');
     searchInput.className = 'search__input';
+    const searchParams = new URLSearchParams(document.location.hash.slice(2));
+    const currentParams = searchParams.get('search');
+    if (currentParams) searchInput.value = currentParams.toString();
 
-    searchBtn.className = 'search__btn';
-    searchBtn.textContent = 'Найти';
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value) searchBtn.style.opacity = '1';
+      else searchBtn.style.opacity = '0.5';
+
+      const searchParams = new URLSearchParams(document.location.hash.slice(2));
+      searchParams.set('search', searchInput.value);
+      window.location.hash = '?' + searchParams.toString();
+
+      const newEvent = new CustomEvent('search', {
+        bubbles: true,
+        detail: {
+          search: searchInput.value,
+        },
+      });
+      searchInput.dispatchEvent(newEvent);
+    });
+
+    document.addEventListener('eventGeneral', (e) => this.searchReset(<CustomEvent>e, searchInput));
+
+    searchBtn.className = 'button search__btn';
+    searchBtn.textContent = '✖';
+    searchBtn.addEventListener('click', () => {
+      searchBtn.style.opacity = '0.5';
+      searchInput.value = '';
+      const searchParams = new URLSearchParams(document.location.hash.slice(2));
+      searchParams.delete('search');
+      window.location.hash = '?' + searchParams.toString();
+
+      const newEvent = new CustomEvent('search', {
+        bubbles: true,
+        detail: {
+          search: searchInput.value,
+        },
+      });
+      searchInput.dispatchEvent(newEvent);
+    });
 
     searchForm.append(searchInput, searchBtn);
     return searchForm;
+  }
+
+  private searchReset(e: CustomEvent, searchInput: HTMLInputElement) {
+    if (e.detail.reset) searchInput.value = '';
   }
 
   private createTopBar(messageNoProducts: HTMLElement): HTMLElement {
@@ -107,7 +150,7 @@ class Catalogue {
     document.addEventListener('productsOnPage', (e) => {
       if (e instanceof CustomEvent) {
         itemsOnPage.innerHTML = '<span class="topbar-itemsOnPage__span">Товаров найдено:</span> ' + e.detail;
-        !e.detail ? messageNoProducts.hidden = false : messageNoProducts.hidden = true;
+        !e.detail ? (messageNoProducts.hidden = false) : (messageNoProducts.hidden = true);
       }
     });
 

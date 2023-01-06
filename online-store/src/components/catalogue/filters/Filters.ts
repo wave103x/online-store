@@ -95,8 +95,8 @@ class Filters {
     label.textContent = input.value;
 
     const searchParams = new URLSearchParams(document.location.hash.slice(2));
-
     const currentPrice = searchParams.get(key);
+
     let currentLeft = currentPrice?.toString().slice(0, currentPrice?.toString().indexOf('-')) || min.toString();
     let currentRight = currentPrice?.toString().slice(currentPrice?.toString().indexOf('-') + 1) || max.toString();
 
@@ -171,7 +171,6 @@ class Filters {
 
   private filterConnect(event: CustomEvent, key: keyof ProductData, input: HTMLElement, label: HTMLElement) {
     if (!(input instanceof HTMLInputElement)) return;
-
     let resultBase = this.products.filter((e) => event.detail.baseVehicle.includes(e.baseVehicle));
     let resultCategory = this.products.filter((e) => event.detail.category.includes(e.category));
     if (!resultBase.length) resultBase = [...this.products];
@@ -193,9 +192,23 @@ class Filters {
       resultStock = this.products.filter((e) => e.stock >= minStock && e.stock <= maxStock);
     }
 
+    const search = event.detail?.search?.trim().toLowerCase();
+    let resultSearch = [...this.products];
+    if (search) {
+      resultSearch = this.products.filter(
+        (e) =>
+          e.title.toLowerCase().includes(search) ||
+          e.category.toLowerCase().includes(search) ||
+          e.baseVehicle.toLowerCase().includes(search) ||
+          e.price.toString().includes(search) ||
+          e.stock.toString().includes(search)
+      );
+    }
+
     let productsOnPage = resultBase.filter((value) => resultCategory.includes(value));
     productsOnPage = productsOnPage.filter((value) => resultPrice.includes(value));
     productsOnPage = productsOnPage.filter((value) => resultStock.includes(value));
+    productsOnPage = productsOnPage.filter((value) => resultSearch.includes(value));
 
     const allOfFilter = this.products.filter((e) => e[key] === label.textContent).length.toString();
     const currentOfFilter = productsOnPage.filter((e) => e[key] === label.textContent).length.toString();
@@ -258,10 +271,18 @@ class Filters {
           baseVehicle: [],
           price: '',
           stock: '',
+          search: '',
           reset: true,
         },
       });
       document.dispatchEvent(newEvent);
+      const newEvent2 = new CustomEvent('search', {
+        detail: {
+          search: '',
+          reset: true,
+        },
+      });
+      document.dispatchEvent(newEvent2);
     }
 
     const productsOnPageEvent = new CustomEvent('productsOnPage', { detail: productsOnPage.length });
@@ -318,6 +339,7 @@ class Filters {
                 baseVehicle: [],
                 price: '',
                 stock: '',
+                search: '',
                 reset: true,
               },
             })

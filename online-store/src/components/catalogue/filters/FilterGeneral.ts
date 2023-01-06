@@ -3,12 +3,14 @@ class FilterGeneral {
   private _baseVehicle: string[] = [];
   private _price: string = '';
   private _stock: string = '';
+  private _search: string = '';
 
   constructor() {
     document.addEventListener('baseVehicle', (event) => {this.baseHandler.call(this, <CustomEvent>event)});
     document.addEventListener('category', (event) => this.categoryHandler.call(this, <CustomEvent>event));
     document.addEventListener('price', (event) => this.priceHandler.call(this, <CustomEvent>event));
     document.addEventListener('stock', (event) => this.stockHandler.call(this, <CustomEvent>event));
+    document.addEventListener('search', (event) => this.searchHandler.call(this, <CustomEvent>event));
   }
 
   private generateEvent() {
@@ -18,6 +20,7 @@ class FilterGeneral {
         baseVehicle: this._baseVehicle,
         price: this._price,
         stock: this._stock,
+        search: this._search,
       },
     });
     document.dispatchEvent(newEvent);
@@ -36,6 +39,10 @@ class FilterGeneral {
   }
   private stockHandler(event: CustomEvent) {
     this._stock = event.detail?.stock;
+    this.generateEvent();
+  }
+  private searchHandler(event: CustomEvent) {
+    this._search = event.detail?.search;
     this.generateEvent();
   }
 }

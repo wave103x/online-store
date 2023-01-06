@@ -29,7 +29,7 @@ class Filters {
   private createRange(key: keyof ProductData, data: ProductData[], searchParams: URLSearchParams) {
     const filterName = key === 'price' ? 'Цена' : key === 'stock' ? 'На складе' : null;
     const filter = document.createElement('div');
-    filter.className = 'filter';
+    filter.className = 'filter filter_range';
 
     const filterTitle = document.createElement('p');
     filterTitle.textContent = filterName;

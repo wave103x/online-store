@@ -13,6 +13,7 @@ const baseConfig = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+      favicon: path.join(__dirname, './src/assets/images/Favicon.png')
     }),
   ],
   module: {

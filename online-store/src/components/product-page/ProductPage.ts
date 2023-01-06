@@ -26,7 +26,7 @@ class ProductPage {
   }
 
   private createComponent(): void {
-    this._componentElement.className = 'main-catalogue';
+    this._componentElement.className = 'main-product';
 
     const breadcrumbs = this.createBreadcrumbs();
 

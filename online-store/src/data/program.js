@@ -64,13 +64,13 @@ const photos = {
 };
 
 const prices = {
-  'Ковши экскаваторные': 6,
+  'Ковши экскаваторные': 5,
   'Бульдозерные отвалы': 6,
   'Бетоноломы': 6,
-  'Коронки, адаптеры': 4,
-  'Стрелы, рукояти': 7,
-  'Оси, втулки': 4,
-  'Ходовая часть': 7,
+  'Коронки, адаптеры': 5,
+  'Стрелы, рукояти': 6,
+  'Оси, втулки': 6,
+  'Ходовая часть': 6,
 };
 
 const imgs = {
@@ -86,7 +86,7 @@ const imgs = {
   'hod1.jpg': 'https://i.imgur.com/wcVOdDS.jpg',
   'hod2.jpg': 'https://i.imgur.com/Ujg8Uee.jpg',
   'koron-th.jpg': 'https://i.imgur.com/i92H2II.jpg',
-  'koron1.jpg': 'https://i.imgur.com/iNi15LT.png',
+  'koron1.jpg': 'https://i.imgur.com/BTaMcia.jpg',
   'koron2.jpg': 'https://i.imgur.com/Fu6vQuO.jpg',
   'kovsh-th.jpg': 'https://i.imgur.com/TAHhLzs.jpg',
   'kovsh1.jpg': 'https://i.imgur.com/ZqT5tBa.jpg',
@@ -140,7 +140,7 @@ async function insertImgs(category) {
 function price(digits) {
   let num = 10;
   digits > 2 ? (num = 100) : (num = 10);
-  return Math.trunc(Math.abs(Math.random() - 1) * 100) * 10 ** (digits - 2) || 100;
+  return Math.floor(Math.abs(Math.random() - 1) * 100) * (10 ** (digits - 2)) || 9000;
 }
 
 function random(min, max) {

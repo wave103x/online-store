@@ -26,7 +26,7 @@ class App {
     const location = window.location.hash.slice(1);
     const main = document.querySelector('.main-basket') as HTMLElement;
     if (main) main.remove();
-    if (this.contentToLoad && location.includes('?')) return;
+    if (this.contentToLoad && location.includes('?') && this.contentToLoad.classList.contains('main-catalogue')) return;
     if (this.contentToLoad) this.contentToLoad.remove();
 
     const path = location.includes('?') ? location.slice(0, location.indexOf('?')) : location;
@@ -48,6 +48,7 @@ class App {
         this.contentToLoad = new Page404().createComponent();
         break;
     }
+
     this._componentElement.append(this.contentToLoad);
   }
 }

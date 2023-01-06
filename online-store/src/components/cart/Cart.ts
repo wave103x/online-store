@@ -25,7 +25,7 @@ class Cart {
     if (main) {
       this._componentElement = main;
     } else {
-      this._componentElement = document.createElement('main');
+      this._componentElement = document.createElement('div');
       this._componentElement.className = 'main main-basket';
     }
     this._componentElement.innerHTML = this.html;

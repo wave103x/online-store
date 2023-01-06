@@ -5,7 +5,7 @@ import ProductPage from './product-page/ProductPage';
 import Cart from './cart/Cart';
 
 class App {
-  private _componentElement = document.body;
+  private _componentElement = document.createElement('main');
   private contentToLoad!: HTMLElement;
   private _cart: Cart;
   private _catalogue = new Catalogue().createComponent();
@@ -19,8 +19,9 @@ class App {
     Cart.setValues();
     const header = new Header();
     this._cart.getHeader(header);
-    this._componentElement.append(header.getComponent(), this._catalogue);
+    this._componentElement.append(this._catalogue);
     this.renderContent();
+    document.body.append(header.getComponent(), this._componentElement);
   }
 
   private renderContent(): void {
@@ -28,11 +29,8 @@ class App {
     const main = document.querySelector('.main-basket') as HTMLElement;
     if (main) main.remove();
 
-    // if (this.contentToLoad && location.includes('?') && this.contentToLoad.classList.contains('main-catalogue')) return;
-    // if (this.contentToLoad && this.contentToLoad.classList.contains('main-catalogue')) this.contentToLoad.hidden = true;
-
     if (this.contentToLoad) this.contentToLoad.remove();
-    
+
     const path = location.includes('?') ? location.slice(0, location.indexOf('?')) : location;
 
     switch (path) {
@@ -58,8 +56,6 @@ class App {
         this._componentElement.append(this.contentToLoad)
         break;
     }
-
-    // if (this._componentElement) this._componentElement.append(this.contentToLoad);
   }
 }
 

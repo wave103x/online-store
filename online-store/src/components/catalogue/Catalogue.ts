@@ -15,7 +15,7 @@ class Catalogue {
   private filterGeneral = new FilterGeneral();
 
   constructor() {
-    this._componentElement = document.createElement(this.TAG_MAIN);
+    this._componentElement = document.createElement('div');
     this.productsContainer = document.createElement('div');
     this.initialProducts = initialProducts;
     this.searchParams = new URLSearchParams(window.location.hash.slice(2));

@@ -1,8 +1,9 @@
 import Header from '../header/Header';
-import './cart.scss';
 import Form from './form/form';
 import ProductData from '../types/ProductData';
 import ProductInCart from '../types/ProductInCart';
+import Promo from './promo/Promo';
+import './cart.scss';
 
 class Cart {
   private _componentElement!: HTMLElement;
@@ -43,8 +44,8 @@ class Cart {
       this._componentElement.append(elem);
     } else {
       this.createItemList();
-      this.addListeners();
       this.createSummary();
+      this.addListeners();
     }
 
     if (localStorage.getItem('doModale')) {
@@ -80,6 +81,7 @@ class Cart {
       const cart = new Cart();
       cart.rebuild();
     });
+
     const rightPageButton = this._componentElement.querySelector('.basket__page-right');
     rightPageButton?.addEventListener('click', () => {
       if (Cart.currentPage + 1 > Cart.pageCount) return;
@@ -88,6 +90,9 @@ class Cart {
       const cart = new Cart();
       cart.rebuild();
     });
+
+    const promo = new Promo(this._componentElement, Cart.productSummary);
+    promo.addListener();
   }
 
   private createItemList(): void {

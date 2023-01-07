@@ -1,6 +1,9 @@
+@import '../../sass/main.scss';
+
 * {
   box-sizing: border-box;
 }
+
 .wrapper {
   max-width: 1440px;
   margin: 0 auto;
@@ -112,9 +115,32 @@
     object-fit: contain;
   }
 
+  &__desc {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__name,
+  &__vehicle,
+  &__category {
+    margin: 0;
+  }
+
   &__name {
     font-size: 1.3rem;
-    margin-left: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  &__vehicle {
+    font-size: 1rem;
+  }
+
+  &__category {
+    font-size: 1rem;
+    opacity: 0.6;
   }
 
   &__aside {
@@ -246,9 +272,22 @@
     justify-content: center;
   }
 
+  .cart-item__link {
+    width: 100%;
+  }
+
   .cart-item__info {
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cart-item__desc {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .cart-item__img {
@@ -257,19 +296,11 @@
   }
 
   .cart-item__name {
-    width: 100%;
     margin-left: 0;
-    margin-bottom: 20px;
-    text-align: center;
+    margin-bottom: 10px;
   }
 
   .cart-item__aside {
     flex-direction: row;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .cart-item__aside {
-    flex-direction: column;
   }
 }

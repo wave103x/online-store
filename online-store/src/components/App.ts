@@ -3,12 +3,14 @@ import Header from './header/Header';
 import Catalogue from './catalogue/Catalogue';
 import ProductPage from './product-page/ProductPage';
 import Cart from './cart/Cart';
+import Footer from './footer/Footer';
 
 class App {
   private _componentElement = document.createElement('main');
   private contentToLoad!: HTMLElement;
   private _cart: Cart;
   private _catalogue = new Catalogue().createComponent();
+  private _footer = new Footer();
 
   constructor() {
     window.addEventListener('hashchange', () => this.renderContent());
@@ -21,7 +23,7 @@ class App {
     this._cart.getHeader(header);
     this._componentElement.append(this._catalogue);
     this.renderContent();
-    document.body.append(header.getComponent(), this._componentElement);
+    document.body.append(header.getComponent(), this._componentElement, this._footer.getComponent());
   }
 
   private renderContent(): void {

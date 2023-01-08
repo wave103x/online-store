@@ -12,7 +12,6 @@ button {
 
 .products-with-filters {
   display: flex;
-  // align-items: flex-start;
   gap: 4vw;
   flex-wrap: wrap-reverse;
 }
@@ -133,7 +132,7 @@ button.search__btn {
 }
 
 .products-with-topbar {
-  flex-grow: 1;
+  flex-grow: 8;
 }
 
 .products {

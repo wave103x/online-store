@@ -7,12 +7,29 @@ class ProductItem {
   private _productData: ProductData;
   private _isHidden = false;
   private _inCart: boolean;
+  private _addToCartBtn = document.createElement('button');
 
   constructor(productData: ProductData, searchParams: URLSearchParams) {
     this._productData = productData;
     this._inCart = Cart.isInCart(this._productData.id);
     document.addEventListener('eventGeneral', (event) => this.updateState(<CustomEvent>event));
+    document.addEventListener('isInCart', (event) => this.updateInCart(<CustomEvent>event));
     this.createElement(this._productData, searchParams);
+  }
+
+  private updateInCart(event: CustomEvent) {
+    const isInCart: boolean = event.detail?.isInCart;
+    const id: number = event.detail?.id;
+    if (id !== this._productData.id) return;
+    if (isInCart) {
+      this._addToCartBtn.classList.add('product__button_added');
+      this._addToCartBtn.textContent = 'В корзине';
+      this._inCart = true;
+    } else {
+      this._addToCartBtn.textContent = 'В корзину';
+      this._addToCartBtn.classList.remove('product__button_added');
+      this._inCart = false;
+    }
   }
 
   private updateState(event: CustomEvent) {
@@ -103,28 +120,28 @@ class ProductItem {
     productProps.className = 'product_props';
     productProps.append(linkTitle, category, stock, baseVehicle);
 
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.textContent = this._inCart ? 'В корзине' : 'В корзину';
-    addToCartBtn.className = 'button product__button';
+    // const addToCartBtn = document.createElement('button');
+    this._addToCartBtn.textContent = this._inCart ? 'В корзине' : 'В корзину';
+    this._addToCartBtn.className = 'button product__button';
 
-    this._inCart ? addToCartBtn.classList.add('product__button_added') : null;
-    addToCartBtn.addEventListener('click', () => {
+    this._inCart ? this._addToCartBtn.classList.add('product__button_added') : null;
+    this._addToCartBtn.addEventListener('click', () => {
       if (this._inCart) {
-        addToCartBtn.textContent = 'В корзину';
+        this._addToCartBtn.textContent = 'В корзину';
         Cart.deleteItem(this._productData.id);
-        addToCartBtn.classList.remove('product__button_added');
+        this._addToCartBtn.classList.remove('product__button_added');
         this._inCart = false;
       } else {
-        addToCartBtn.classList.add('product__button_added');
+        this._addToCartBtn.classList.add('product__button_added');
         Cart.addItem(this._productData);
-        addToCartBtn.textContent = 'В корзине';
+        this._addToCartBtn.textContent = 'В корзине';
         this._inCart = true;
       }
     });
 
     const priceWithBtn = document.createElement('div');
     priceWithBtn.className = 'product__price-btn';
-    priceWithBtn.append(price, addToCartBtn);
+    priceWithBtn.append(price, this._addToCartBtn);
 
     this._componentElement.dataset.price = String(data.price);
     this._componentElement.dataset.stock = String(data.stock);

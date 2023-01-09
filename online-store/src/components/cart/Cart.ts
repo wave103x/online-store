@@ -164,12 +164,12 @@ class Cart {
 
     const category = document.createElement('p');
     category.classList.add('cart-item__category');
-    category.innerText = "Категория: " + product.category;
+    category.innerText = 'Категория: ' + product.category;
     description.append(category);
 
     const baseVehicle = document.createElement('p');
     baseVehicle.classList.add('cart-item__vehicle');
-    baseVehicle.innerText = "Базовая машина: " + product.baseVehicle;
+    baseVehicle.innerText = 'Базовая машина: ' + product.baseVehicle;
     description.append(baseVehicle);
 
     info.append(description);

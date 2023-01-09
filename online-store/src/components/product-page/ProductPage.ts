@@ -122,7 +122,9 @@ class ProductPage {
     fastBuyBtn.textContent = 'Быстрый заказ';
     fastBuyBtn.addEventListener('click', () => {
       localStorage.setItem('doModale', 'true');
-      Cart.addItem(this._product);
+      if (!Cart.isInCart(this._product.id)) {
+        Cart.addItem(this._product);
+      }
       window.location.hash = '#cart';
     });
 

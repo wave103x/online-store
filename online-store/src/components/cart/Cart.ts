@@ -1,8 +1,9 @@
 import Header from '../header/Header';
-import './cart.scss';
 import Form from './form/form';
 import ProductData from '../types/ProductData';
 import ProductInCart from '../types/ProductInCart';
+import Promo from './promo/Promo';
+import './cart.scss';
 
 class Cart {
   private _componentElement!: HTMLElement;
@@ -43,13 +44,13 @@ class Cart {
       this._componentElement.append(elem);
     } else {
       this.createItemList();
-      this.addListeners();
       this.createSummary();
+      this.addListeners();
     }
 
     if (localStorage.getItem('doModale')) {
       this._componentElement.append(new Form().createComponent());
-      localStorage.removeItem('doModale')
+      localStorage.removeItem('doModale');
     }
 
     return this._componentElement;
@@ -72,8 +73,6 @@ class Cart {
       document.querySelector('.main')?.append(new Form().createComponent());
     });
 
-
-
     const leftPageButton = this._componentElement.querySelector('.basket__page-left');
     leftPageButton?.addEventListener('click', () => {
       if (Cart.currentPage - 1 < 1) return;
@@ -82,6 +81,7 @@ class Cart {
       const cart = new Cart();
       cart.rebuild();
     });
+
     const rightPageButton = this._componentElement.querySelector('.basket__page-right');
     rightPageButton?.addEventListener('click', () => {
       if (Cart.currentPage + 1 > Cart.pageCount) return;
@@ -90,6 +90,9 @@ class Cart {
       const cart = new Cart();
       cart.rebuild();
     });
+
+    const promo = new Promo(this._componentElement, Cart.productSummary);
+    promo.addListener();
   }
 
   private createItemList(): void {
@@ -131,7 +134,6 @@ class Cart {
 
     const info = document.createElement('div');
     info.classList.add('cart-item__info');
-    // info.addEventListener('click', () => )
     const link = document.createElement('a');
     link.href = `#products/${product.id}`;
     link.className = 'cart-item__link';
@@ -152,10 +154,25 @@ class Cart {
     img.className = 'cart-item__img';
     info.append(img);
 
+    const description = document.createElement('div');
+    description.className = 'cart-item__desc';
+
     const name = document.createElement('p');
     name.classList.add('cart-item__name');
     name.innerText = product.title;
-    info.append(name);
+    description.append(name);
+
+    const category = document.createElement('p');
+    category.classList.add('cart-item__category');
+    category.innerText = 'Категория: ' + product.category;
+    description.append(category);
+
+    const baseVehicle = document.createElement('p');
+    baseVehicle.classList.add('cart-item__vehicle');
+    baseVehicle.innerText = 'Базовая машина: ' + product.baseVehicle;
+    description.append(baseVehicle);
+
+    info.append(description);
 
     item.append(link);
 
@@ -180,8 +197,8 @@ class Cart {
       Cart.deleteItem(+id);
 
       const cart = new Cart();
-      document.body.querySelector('.main')?.remove();
-      document.body.append(cart.createComponent());
+      Cart.currentPage = 1;
+      cart.rebuild();
     });
     controls.append(less);
 
@@ -203,8 +220,7 @@ class Cart {
       }
 
       const cart = new Cart();
-      document.body.querySelector('.main')?.remove();
-      document.body.append(cart.createComponent());
+      cart.rebuild();
     });
     controls.append(more);
 
@@ -233,14 +249,7 @@ class Cart {
         this.itemList[this.itemList.findIndex((value) => value.product.id === item.id)].count++;
       }
       this.productsCount++;
-      this.productSummary = 0;
-      this.itemList.forEach((item) => {
-        this.productSummary += item.count * item.product.price;
-      });
-      this.productSummary = 0;
-      this.itemList.forEach((item) => {
-        this.productSummary += item.count * item.product.price;
-      });
+      this.calculateSummary();
     }
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
@@ -256,18 +265,17 @@ class Cart {
       this.itemList.splice(index, 1);
     }
     this.productsCount--;
-    this.productSummary = 0;
-    this.itemList.forEach((item) => {
-      this.productSummary += item.count * item.product.price;
-    });
+    this.calculateSummary();
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
   }
 
-  private static saveValues(): void {
-    localStorage.setItem('itemList', JSON.stringify(this.itemList));
-    localStorage.setItem('productSummary', JSON.stringify(this.productSummary));
-    localStorage.setItem('productsCount', JSON.stringify(this.productsCount));
+  static clearItemList(): void {
+    Cart.itemList = [];
+  }
+
+  static isInCart(id: Number): boolean {
+    return !!this.itemList.find((value) => value.product.id === id);
   }
 
   static setValues(): void {
@@ -285,16 +293,21 @@ class Cart {
     }
   }
 
-  static clearItemList(): void {
-    Cart.itemList = [];
+  private static calculateSummary() {
+    this.productSummary = 0;
+    this.itemList.forEach((item) => {
+      this.productSummary += item.count * item.product.price;
+    });
+  }
+
+  private static saveValues(): void {
+    localStorage.setItem('itemList', JSON.stringify(this.itemList));
+    localStorage.setItem('productSummary', JSON.stringify(this.productSummary));
+    localStorage.setItem('productsCount', JSON.stringify(this.productsCount));
   }
 
   private rebuild(): void {
-    // document.body.querySelector('.main')?.remove();
     this.createComponent();
-  }
-  static isInCart(id: Number): boolean {
-    return !!this.itemList.find((value) => value.product.id === id);
   }
 }
 

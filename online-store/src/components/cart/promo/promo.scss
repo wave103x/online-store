@@ -1,0 +1,30 @@
+.promo-for-test {
+    margin: 0;
+    margin-top: -15px;
+    opacity: 0.7;
+  }
+  
+  .promo__button {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 10px;
+    background-color: #434b5a;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 3px 5px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      background-color: #2e333d;
+    }
+  }
+
+  .summary_old {
+    text-decoration: line-through;
+  }
+
+  .summary-with-sale {
+    margin: 0;
+    font-size: 1.4rem;
+  }

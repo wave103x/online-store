@@ -1,2 +1,23 @@
 @import './base/typography';
+@import './base/variables';
 @import './elements/buttons';
+
+body {
+  padding: 0;
+}
+
+body, input, textarea, button {
+  font-family: 'Roboto', sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}

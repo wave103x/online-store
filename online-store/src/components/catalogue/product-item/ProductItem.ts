@@ -7,20 +7,12 @@ class ProductItem {
   private _productData: ProductData;
   private _isHidden = false;
   private _inCart: boolean;
-<<<<<<< HEAD
-=======
   private _addToCartBtn = document.createElement('button');
->>>>>>> fix/productTileInCart
 
   constructor(productData: ProductData, searchParams: URLSearchParams) {
     this._productData = productData;
     this._inCart = Cart.isInCart(this._productData.id);
     document.addEventListener('eventGeneral', (event) => this.updateState(<CustomEvent>event));
-<<<<<<< HEAD
-    this.createElement(this._productData, searchParams);
-  }
-
-=======
     document.addEventListener('isInCart', (event) => this.updateInCart(<CustomEvent>event));
     this.createElement(this._productData, searchParams);
   }
@@ -40,7 +32,6 @@ class ProductItem {
     }
   }
 
->>>>>>> fix/productTileInCart
   private updateState(event: CustomEvent) {
     const category: string[] = event.detail?.category;
     const baseVehicle: string[] = event.detail?.baseVehicle;
@@ -129,24 +120,6 @@ class ProductItem {
     productProps.className = 'product_props';
     productProps.append(linkTitle, category, stock, baseVehicle);
 
-<<<<<<< HEAD
-    const addToCartBtn = document.createElement('button');
-    addToCartBtn.textContent = this._inCart ? 'В корзине' : 'В корзину';
-    addToCartBtn.className = 'button product__button';
-
-    this._inCart ? addToCartBtn.classList.add('product__button_added') : null;
-    addToCartBtn.addEventListener('click', () => {
-      if (this._inCart) {
-        addToCartBtn.textContent = 'В корзину';
-        Cart.deleteItem(this._productData.id);
-        addToCartBtn.classList.remove('product__button_added');
-        this._inCart = false;
-      } else {
-        addToCartBtn.classList.add('product__button_added');
-        Cart.addItem(this._productData);
-        addToCartBtn.textContent = 'В корзине';
-=======
-    // const addToCartBtn = document.createElement('button');
     this._addToCartBtn.textContent = this._inCart ? 'В корзине' : 'В корзину';
     this._addToCartBtn.className = 'button product__button';
 
@@ -161,18 +134,13 @@ class ProductItem {
         this._addToCartBtn.classList.add('product__button_added');
         Cart.addItem(this._productData);
         this._addToCartBtn.textContent = 'В корзине';
->>>>>>> fix/productTileInCart
         this._inCart = true;
       }
     });
 
     const priceWithBtn = document.createElement('div');
     priceWithBtn.className = 'product__price-btn';
-<<<<<<< HEAD
-    priceWithBtn.append(price, addToCartBtn);
-=======
     priceWithBtn.append(price, this._addToCartBtn);
->>>>>>> fix/productTileInCart
 
     this._componentElement.dataset.price = String(data.price);
     this._componentElement.dataset.stock = String(data.stock);

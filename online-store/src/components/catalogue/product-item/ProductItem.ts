@@ -11,8 +11,8 @@ class ProductItem {
   constructor(productData: ProductData, searchParams: URLSearchParams) {
     this._productData = productData;
     this._inCart = Cart.isInCart(this._productData.id);
-    this.createElement(this._productData, searchParams);
     document.addEventListener('eventGeneral', (event) => this.updateState(<CustomEvent>event));
+    this.createElement(this._productData, searchParams);
   }
 
   private updateState(event: CustomEvent) {

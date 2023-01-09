@@ -348,7 +348,7 @@ class Filters {
         break;
       case 'copy':
         const text = document.createElement('span');
-        text.textContent = 'Копировать фильтрацию';
+        text.textContent = 'Копировать URL';
         button.className = 'filter__btn filter_copy-btn';
         icon.src = require('../../../assets/icons/icon-copy.svg') as string;
         button.prepend(icon, text);
@@ -356,7 +356,7 @@ class Filters {
           navigator.clipboard.writeText(window.location.href);
           text.textContent = 'Успешно';
           setTimeout(() => {
-            text.textContent = 'Копировать фильтрацию';
+            text.textContent = 'Копировать URL';
           }, 1000);
         });
         break;

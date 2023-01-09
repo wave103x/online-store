@@ -9,16 +9,17 @@ class App {
   private _componentElement = document.createElement('main');
   private contentToLoad!: HTMLElement;
   private _cart: Cart;
-  private _catalogue = new Catalogue().createComponent();
+  private _catalogue: HTMLElement;
   private _footer = new Footer();
 
   constructor() {
     window.addEventListener('hashchange', () => this.renderContent());
     this._cart = new Cart();
+    Cart.setValues();
+    this._catalogue = new Catalogue().createComponent();
   }
 
   init(): void {
-    Cart.setValues();
     const header = new Header();
     this._cart.getHeader(header);
     this._componentElement.append(this._catalogue);
@@ -39,7 +40,7 @@ class App {
       case location.match(/products\/\d+/gi)?.at(0):
         this._catalogue.hidden = true;
         this.contentToLoad = new ProductPage().getComponent();
-        this._componentElement.append(this.contentToLoad)
+        this._componentElement.append(this.contentToLoad);
         break;
       case '':
         this._catalogue.hidden = false;
@@ -49,13 +50,13 @@ class App {
         this._catalogue.hidden = true;
         document.title = 'Корзина';
         this.contentToLoad = this._cart.createComponent();
-        this._componentElement.append(this.contentToLoad)
+        this._componentElement.append(this.contentToLoad);
         break;
       default:
         this._catalogue.hidden = true;
         document.title = 'ой! 404';
         this.contentToLoad = new Page404().createComponent();
-        this._componentElement.append(this.contentToLoad)
+        this._componentElement.append(this.contentToLoad);
         break;
     }
   }

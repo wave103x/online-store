@@ -253,6 +253,14 @@ class Cart {
     }
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
+
+    const newEvent = new CustomEvent('isInCart', {
+      detail: {
+        isInCart: true,
+        id: item.id,
+      },
+    });
+    document.dispatchEvent(newEvent)
   }
 
   static deleteItem(id: Number): void {
@@ -268,6 +276,14 @@ class Cart {
     this.calculateSummary();
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
+
+    const newEvent = new CustomEvent('isInCart', {
+      detail: {
+        isInCart: false,
+        id: id,
+      },
+    });
+    this.itemList.find((value) => value.product.id === id) ? null : document.dispatchEvent(newEvent);
   }
 
   static clearItemList(): void {

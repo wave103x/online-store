@@ -159,12 +159,16 @@ class Form {
     inputName.addEventListener('keydown', function (e) {
       const number = '1234567890';
       if (number.indexOf(e.key) === -1) {
-        if (e.key != 'Backspace') {
+        if (e.key !== 'Backspace') {
           e.preventDefault();
           return;
         }
       }
-      if (this.value.length === 15 || (e.key === 'Backspace' && this.value.length === 17)) {
+      if (this.value.length === 16 && e.key !== 'Backspace') {
+        e.preventDefault();
+        return;
+      }
+      if (this.value.length === 15 && e.key !== 'Backspace') {
         Form.valid.cardNumber = true;
         cardError1.innerText = '';
         return;
@@ -207,6 +211,10 @@ class Form {
           e.preventDefault();
           return;
         }
+      }
+      if (this.value.length === 5 && e.key !== 'Backspace') {
+        e.preventDefault();
+        return;
       }
     });
 
@@ -253,7 +261,11 @@ class Form {
           return;
         }
       }
-      if (this.value.length === 2 || (e.key === 'Backspace' && this.value.length === 4)) {
+      if (this.value.length === 3 && e.key !== 'Backspace') {
+        e.preventDefault();
+        return;
+      }
+      if (this.value.length === 2 && e.key !== 'Backspace') {
         Form.valid.cvv = true;
         cardError3.innerText = '';
         return;

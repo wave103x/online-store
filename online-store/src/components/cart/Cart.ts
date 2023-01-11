@@ -253,6 +253,15 @@ class Cart {
     }
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
+
+    const newEvent = new CustomEvent('isInCart', {
+      detail: {
+        isInCart: false,
+        id: item.id,
+      },
+    });
+
+    this.itemList.find((value) => value.product.id === item.id) ? null : document.dispatchEvent(newEvent);
   }
 
   static deleteItem(id: Number): void {
@@ -268,10 +277,31 @@ class Cart {
     this.calculateSummary();
     this.saveValues();
     Cart._header.updateState(this.productSummary, this.productsCount);
+
+    const newEvent = new CustomEvent('isInCart', {
+      detail: {
+        isInCart: false,
+        id: id,
+      },
+    });
+    this.itemList.find((value) => value.product.id === id) ? null : document.dispatchEvent(newEvent);
   }
 
   static clearItemList(): void {
-    Cart.itemList = [];
+    this.itemList.forEach((item) => {
+      const newEvent = new CustomEvent('isInCart', {
+        detail: {
+          isInCart: false,
+          id: item.product.id,
+        },
+      });
+      document.dispatchEvent(newEvent);
+    });
+    this.itemList = [];
+    this.productSummary = 0;
+    this.productsCount = 0;
+    this.saveValues();
+    this._header.updateState(this.productSummary, this.productsCount);
   }
 
   static isInCart(id: Number): boolean {

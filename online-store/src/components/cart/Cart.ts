@@ -260,7 +260,7 @@ class Cart {
         id: item.id,
       },
     });
-    document.dispatchEvent(newEvent)
+    document.dispatchEvent(newEvent);
   }
 
   static deleteItem(id: Number): void {
@@ -287,7 +287,20 @@ class Cart {
   }
 
   static clearItemList(): void {
-    Cart.itemList = [];
+    this.itemList.forEach(item => {
+      const newEvent = new CustomEvent('isInCart', {
+        detail: {
+          isInCart: false,
+          id: item.product.id,
+        },
+      });
+    document.dispatchEvent(newEvent);
+    });
+    this.itemList = [];
+    this.productSummary = 0;
+    this.productsCount = 0;
+    this.saveValues();
+    this._header.updateState(this.productSummary, this.productsCount);
   }
 
   static isInCart(id: Number): boolean {

@@ -10,7 +10,7 @@
 }
 
 .container {
-  margin-top: 150px;
+  padding-top: 150px;
   display: flex;
   justify-content: space-between;
 }
@@ -234,7 +234,7 @@
 
 @media screen and (max-width: 900px) {
   .container {
-    margin-top: 50px;
+    padding-top: 50px;
     flex-direction: column;
   }
 

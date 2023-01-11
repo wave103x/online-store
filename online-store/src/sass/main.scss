@@ -6,7 +6,10 @@ body {
   padding: 0;
 }
 
-body, input, textarea, button {
+body,
+input,
+textarea,
+button {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -16,8 +19,16 @@ body, input, textarea, button {
   box-sizing: border-box;
 }
 
+main {
+  min-height: calc(100vh - (67.05px + 29px + 2.5rem + 1rem + 2.5rem + 1rem));
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 12px;
+  }
+
+  main {
+    min-height: calc(100vh - (50.28px + 22px + 2.5rem + 1rem + 2.5rem + 1rem));
   }
 }

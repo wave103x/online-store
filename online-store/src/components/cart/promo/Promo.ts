@@ -88,7 +88,7 @@ class Promo {
     this.promoInput.before(promoDivAdded);
 
     this.sale += this.promo[name].sale / 100;
-    this.summaryWithSale = this.summary * (1 - this.sale);
+    this.summaryWithSale = Math.ceil(this.summary * (1 - this.sale));
     Cart._header.updateState(this.summaryWithSale, Cart.productsCount);
 
     if (!this.summaryWithSaleDiv) {
@@ -108,7 +108,7 @@ class Promo {
     this.checkForPromo();
 
     this.sale -= this.promo[name].sale / 100;
-    this.summaryWithSale = Math.floor(this.summary * (1 - this.sale));
+    this.summaryWithSale = Math.ceil(this.summary * (1 - this.sale));
     Cart._header.updateState(this.summaryWithSale, Cart.productsCount);
 
     if (this.summaryWithSale === this.summary) {

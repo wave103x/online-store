@@ -56,6 +56,7 @@ class ProductItem {
       this._productData.baseVehicle.toLowerCase().includes(search) ||
       this._productData.price.toString().includes(search) ||
       this._productData.stock.toString().includes(search);
+
     if (resultBase && resultCat && resultPrice && resultStock && resultSearch) {
       this._componentElement.style.display = 'flex';
       this._isHidden = false;

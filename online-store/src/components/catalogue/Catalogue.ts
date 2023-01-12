@@ -46,7 +46,6 @@ class Catalogue {
 
     this._componentElement.className = this.CLASS_MAIN;
 
-    this.searchParams.toString();
     document.dispatchEvent(
       new CustomEvent('eventGeneral', {
         detail: {

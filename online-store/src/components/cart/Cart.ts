@@ -256,12 +256,12 @@ class Cart {
 
     const newEvent = new CustomEvent('isInCart', {
       detail: {
-        isInCart: false,
+        isInCart: true,
         id: item.id,
       },
     });
 
-    this.itemList.find((value) => value.product.id === item.id) ? null : document.dispatchEvent(newEvent);
+    document.dispatchEvent(newEvent);
   }
 
   static deleteItem(id: Number): void {

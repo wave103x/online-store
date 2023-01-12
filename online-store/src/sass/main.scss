@@ -19,7 +19,8 @@ button {
   box-sizing: border-box;
 }
 
-main {
+main,
+.not-found {
   min-height: calc(100vh - (67.05px + 29px + 2.5rem + 1rem + 2.5rem + 1rem));
 }
 
@@ -28,7 +29,8 @@ main {
     font-size: 12px;
   }
 
-  main {
+  main,
+  .not-found {
     min-height: calc(100vh - (50.28px + 22px + 2.5rem + 1rem + 2.5rem + 1rem));
   }
 }

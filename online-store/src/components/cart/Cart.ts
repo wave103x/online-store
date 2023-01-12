@@ -33,6 +33,11 @@ class Cart {
     (this._componentElement.querySelector('.basket__count-number') as HTMLInputElement).value =
       Cart.pageItemCount.toString();
 
+    Cart.pageCount = Math.ceil(Cart.itemList.length / Cart.pageItemCount);
+    if (Cart.pageCount < Cart.currentPage) {
+      Cart.currentPage = Cart.pageCount;
+    }
+
     const pageNumber = this._componentElement.querySelector('.basket_page-number') as HTMLElement;
     pageNumber.innerText = Cart.currentPage.toString();
 
@@ -97,7 +102,6 @@ class Cart {
 
   private createItemList(): void {
     const basketList = this._componentElement.querySelector('.basket__list');
-    Cart.pageCount = Math.ceil(Cart.itemList.length / Cart.pageItemCount);
 
     const min = Cart.pageItemCount * (Cart.currentPage - 1);
     const max = Cart.currentPage === Cart.pageCount ? Cart.itemList.length : Cart.pageItemCount * Cart.currentPage;
@@ -197,7 +201,6 @@ class Cart {
       Cart.deleteItem(+id);
 
       const cart = new Cart();
-      Cart.currentPage = 1;
       cart.rebuild();
     });
     controls.append(less);

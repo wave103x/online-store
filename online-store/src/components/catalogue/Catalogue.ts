@@ -1,4 +1,5 @@
 import Filters from './filters/Filters';
+import SortTypes from '../types/SortTypes';
 import initialProducts from '../../data/data.json';
 import type ProductData from '../types/ProductData';
 import ProductItem from './product-item/ProductItem';
@@ -139,10 +140,10 @@ class Catalogue {
     const itemsOnPage = document.createElement('div');
 
     const sortSelect = this.createSelect([
-      'Сначала дешевые',
-      'Сначала дорогие',
-      'Больше на складе',
-      'Меньше на складе',
+      SortTypes.PriceAsc,
+      SortTypes.PriceDesc,
+      SortTypes.StockDesc,
+      SortTypes.StockAsc
     ]);
 
     itemsOnPage.className = 'topbar__items-on-page';
@@ -220,13 +221,6 @@ class Catalogue {
 
     select.addEventListener('change', (event: Event) => this.selectHandle(event));
 
-    const sortTypes = {
-      priceDesc: 'Сначала дорогие',
-      priceAsc: 'Сначала дешевые',
-      stockDesc: 'Больше на складе',
-      stockAsc: 'Меньше на складе',
-    };
-
     for (let opt of options) {
       const option = document.createElement('option');
       option.textContent = opt;
@@ -235,16 +229,16 @@ class Catalogue {
       const urlOpt = this.searchParams.get('sort');
       switch (urlOpt) {
         case 'priceDesc':
-          if (option.textContent === 'Сначала дорогие') option.setAttribute('selected', 'true');
+          if (option.textContent === SortTypes.PriceDesc) option.setAttribute('selected', 'true');
           break;
         case 'priceAsc':
-          if (option.textContent === 'Сначала дешевые') option.setAttribute('selected', 'true');
+          if (option.textContent === SortTypes.PriceAsc) option.setAttribute('selected', 'true');
           break;
         case 'stockDesc':
-          if (option.textContent === 'Больше на складе') option.setAttribute('selected', 'true');
+          if (option.textContent === SortTypes.StockDesc) option.setAttribute('selected', 'true');
           break;
         case 'stockAsc':
-          if (option.textContent === 'Меньше на складе') option.setAttribute('selected', 'true');
+          if (option.textContent === SortTypes.StockAsc) option.setAttribute('selected', 'true');
           break;
       }
     }
@@ -256,28 +250,28 @@ class Catalogue {
     if (target instanceof HTMLSelectElement) {
       const products = Array.from(this.productsContainer.children) as HTMLElement[];
       switch (target.value) {
-        case 'Сначала дорогие':
+        case SortTypes.PriceDesc:
           products
             .sort((a, b) => Number(b.dataset.price) - Number(a.dataset.price))
             .forEach((node) => this.productsContainer.append(node));
           this.searchParams.set('sort', 'priceDesc');
           window.location.hash = '?' + this.searchParams.toString();
           break;
-        case 'Сначала дешевые':
+        case SortTypes.PriceAsc:
           products
             .sort((a, b) => Number(a.dataset.price) - Number(b.dataset.price))
             .forEach((node) => this.productsContainer.append(node));
           this.searchParams.set('sort', 'priceAsc');
           window.location.hash = '?' + this.searchParams.toString();
           break;
-        case 'Больше на складе':
+        case SortTypes.StockDesc:
           products
             .sort((a, b) => Number(b.dataset.stock) - Number(a.dataset.stock))
             .forEach((node) => this.productsContainer.append(node));
           this.searchParams.set('sort', 'stockDesc');
           window.location.hash = '?' + this.searchParams.toString();
           break;
-        case 'Меньше на складе':
+        case SortTypes.StockAsc:
           products
             .sort((a, b) => Number(a.dataset.stock) - Number(b.dataset.stock))
             .forEach((node) => this.productsContainer.append(node));

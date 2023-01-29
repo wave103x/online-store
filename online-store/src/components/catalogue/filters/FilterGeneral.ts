@@ -1,3 +1,5 @@
+import CustomEvents from "../../types/CustomEvents";
+
 class FilterGeneral {
   private _category: string[] = [];
   private _baseVehicle: string[] = [];
@@ -6,15 +8,15 @@ class FilterGeneral {
   private _search: string = '';
 
   constructor() {
-    document.addEventListener('baseVehicle', (event) => {this.baseHandler.call(this, <CustomEvent>event)});
-    document.addEventListener('category', (event) => this.categoryHandler.call(this, <CustomEvent>event));
-    document.addEventListener('price', (event) => this.priceHandler.call(this, <CustomEvent>event));
-    document.addEventListener('stock', (event) => this.stockHandler.call(this, <CustomEvent>event));
-    document.addEventListener('search', (event) => this.searchHandler.call(this, <CustomEvent>event));
+    document.addEventListener(CustomEvents.BaseVehicle, (event) => {this.baseHandler.call(this, <CustomEvent>event)});
+    document.addEventListener(CustomEvents.Category, (event) => this.categoryHandler.call(this, <CustomEvent>event));
+    document.addEventListener(CustomEvents.Price, (event) => this.priceHandler.call(this, <CustomEvent>event));
+    document.addEventListener(CustomEvents.Stock, (event) => this.stockHandler.call(this, <CustomEvent>event));
+    document.addEventListener(CustomEvents.Search, (event) => this.searchHandler.call(this, <CustomEvent>event));
   }
 
   private generateEvent() {
-    const newEvent = new CustomEvent('eventGeneral', {
+    const newEvent = new CustomEvent(CustomEvents.EventGeneral, {
       detail: {
         category: this._category,
         baseVehicle: this._baseVehicle,

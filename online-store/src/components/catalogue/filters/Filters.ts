@@ -1,7 +1,5 @@
 import type ProductData from '../../types/ProductData';
 import ParamsToFilter from '../../types/ParamsToFilter';
-import baseVehicles from './bases.json';
-import FilterNames from '../../types/FilterNames';
 import './filters.scss';
 
 class Filters {
@@ -39,7 +37,6 @@ class Filters {
     values.sort((a, b) => a - b);
     const min = values[0];
     const max = values[values.length - 1];
-    const step = Math.ceil((max - min) / 50);
 
     const inputL = document.createElement('input');
     inputL.className = 'filter__range';
@@ -47,9 +44,7 @@ class Filters {
     inputL.setAttribute('min', min.toString());
     inputL.setAttribute('max', max.toString());
     inputL.setAttribute('name', 'rangeL');
-    // inputL.setAttribute('value', min.toString());
     inputL.setAttribute('value', inputL.dataset.value || min.toString());
-    // inputL.setAttribute('step', step.toString());
 
     const inputR = document.createElement('input');
     inputR.className = 'filter__range';
@@ -57,9 +52,7 @@ class Filters {
     inputR.setAttribute('min', min.toString());
     inputR.setAttribute('max', max.toString());
     inputR.setAttribute('name', 'rangeR');
-    // inputR.setAttribute('value', max.toString());
     inputR.setAttribute('value', inputR.dataset.value || max.toString());
-    // inputR.setAttribute('step', step.toString());
 
     const labelL = document.createElement('label');
     labelL.textContent = inputL.getAttribute('min');

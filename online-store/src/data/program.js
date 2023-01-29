@@ -1,7 +1,10 @@
 const fs = require('fs/promises');
 const path = require('path');
+const PRODUCTS_COUNT = 41;
+const THUMBNAIL_JPG = '-th.jpg';
+const THUMBNAIL = 'th';
 
-const bases = [
+const BASES = [
   'Caterpillar',
   'Komatsu',
   'Hyundai',
@@ -16,7 +19,7 @@ const bases = [
   'Doosan',
 ];
 
-const title = {
+const TITLES = {
   'Ковши экскаваторные': 'Ковш',
   'Бульдозерные отвалы': 'Отвал',
   'Бетоноломы': 'Бетонолом',
@@ -26,7 +29,7 @@ const title = {
   'Ходовая часть': 'Гусеничная цепь',
 };
 
-const descriptions = {
+const DESCRIPTIONS = {
   'Ковши экскаваторные':
     'Ковш применяется для разработки котлованов, карьеров в грунтах I-IV категорий и разгрузки сыпучих материалов, плотность до 1600 кг/м3 (песок, суглинок, растительный грунт, щебень).',
   'Бульдозерные отвалы':
@@ -43,7 +46,7 @@ const descriptions = {
     'Прямые поставки комплектующих для спецтехники брендов KMF, ITM, USCO более 10 лет и всегда имеет большой ассортимент продукции в наличии на своих складах.',
 };
 
-const catergories = [
+const CATEGORIES = [
   'Ковши экскаваторные',
   'Бульдозерные отвалы',
   'Бетоноломы',
@@ -53,7 +56,7 @@ const catergories = [
   'Ходовая часть',
 ];
 
-const photos = {
+const PHOTOS = {
   'Ковши экскаваторные': 'kovsh',
   'Бульдозерные отвалы': 'otval',
   'Бетоноломы': 'betonolom',
@@ -63,7 +66,7 @@ const photos = {
   'Ходовая часть': 'hod',
 };
 
-const prices = {
+const PRICES = {
   'Ковши экскаваторные': 5,
   'Бульдозерные отвалы': 6,
   'Бетоноломы': 6,
@@ -73,7 +76,7 @@ const prices = {
   'Ходовая часть': 6,
 };
 
-const imgs = {
+const IMGS = {
   'arm-th.jpg': 'https://i.imgur.com/VCrzjYe.jpg',
   'arm1.jpg': 'https://i.imgur.com/hQkjGEx.jpg',
   'arm2.jpg': 'https://i.imgur.com/P2HvbTG.jpg',
@@ -104,20 +107,20 @@ const imgs = {
 
 async function write() {
   const res = [];
-  for (let i = 1; i < 41; i++) {
-    const category = catergories[random(0, 6)];
+  for (let i = 1; i < PRODUCTS_COUNT; i++) {
+    const category = CATEGORIES[random(0, 6)];
     const baseVehicle = baseV();
     const id = i;
-    const thumbName = photos[category] + '-th.jpg';
+    const thumbName = PHOTOS[category] + THUMBNAIL_JPG;
     const obj = {
       id: id,
-      title: title[category] + ' VM ' + baseVehicle[0],
-      description: descriptions[category],
-      price: price(prices[category]),
+      title: TITLES[category] + ' VM ' + baseVehicle[0],
+      description: DESCRIPTIONS[category],
+      price: price(PRICES[category]),
       stock: random(1, 12),
       baseVehicle: baseVehicle,
       category: category,
-      thumbnail: imgs[thumbName],
+      thumbnail: IMGS[thumbName],
       images: await insertImgs(category),
     };
     res.push(obj);
@@ -129,10 +132,10 @@ write();
 
 async function insertImgs(category) {
   const res = [];
-  const name = photos[category];
+  const name = PHOTOS[category];
   const files = await fs.readdir(path.join(__dirname, '../assets/images/products'), { withFileTypes: true });
   for (let file of files) {
-    if (file.name.includes(name) && !file.name.includes('th')) res.push(imgs[file.name]);
+    if (file.name.includes(name) && !file.name.includes(THUMBNAIL)) res.push(IMGS[file.name]);
   }
   return res;
 }
@@ -148,10 +151,5 @@ function random(min, max) {
 }
 
 function baseV() {
-  // const res = [];
-  // for (let i = 0; i < random(3, 6); i++) {
-  //   res.push(bases[random(0, 11)]);
-  // }
-  // return [...new Set(res)];
-  return bases[random(0,11)]
+  return BASES[random(0,11)]
 }

@@ -1,7 +1,6 @@
 @import '../../../sass/main.scss';
 
 .product_props p {
-  // padding: 4px 0;
   margin: 6px 0;
 }
 
@@ -51,7 +50,9 @@
   }
 }
 
-.product__category, .product__stock, .product__baseVehicle {
+.product__category,
+.product__stock,
+.product__baseVehicle {
   opacity: 0.6;
 }
 
